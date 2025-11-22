@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('image_url');
             $table->string('github_url')->nullable();
             $table->string('live_url')->nullable();
-            $table->json('technologies');
+
             $table->timestamps();
         });
     }

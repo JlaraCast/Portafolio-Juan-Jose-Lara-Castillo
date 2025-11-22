@@ -15,4 +15,9 @@ class Experience extends Model
         'location' => 'array',
         'description' => 'array',
     ];
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class);
+    }
 }

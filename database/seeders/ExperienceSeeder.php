@@ -13,7 +13,7 @@ class ExperienceSeeder extends Seeder
     public function run(): void
     {
         // Work Experience
-        \App\Models\Experience::create([
+        $exp1 = \App\Models\Experience::create([
             'company' => ['es' => 'Universidad de Costa Rica UCR', 'en' => 'University of Costa Rica UCR'],
             'role' => ['es' => 'Desarrollador Backend en el equipo de I+D', 'en' => 'Backend Developer on the I+D Team'],
             'period' => ['es' => 'ago. 2025 - actualidad', 'en' => 'Aug 2025 - Present'],
@@ -26,8 +26,12 @@ class ExperienceSeeder extends Seeder
             'type' => 'work',
         ]);
 
+        // Attach skills: Laravel, PHP, SQL
+        $skills1 = \App\Models\Skill::whereIn('name', ['Laravel', 'PHP', 'SQL'])->get();
+        $exp1->skills()->attach($skills1);
+
         // Education
-        \App\Models\Experience::create([
+        $exp2 = \App\Models\Experience::create([
             'company' => ['es' => 'Universidad de Costa Rica UCR', 'en' => 'University of Costa Rica UCR'],
             'role' => ['es' => 'Bachillerato en Informática Empresarial', 'en' => 'Bachelor’s Degree, Business Informatics'],
             'period' => ['es' => 'ene. 2022 - dic. 2026', 'en' => 'Jan 2022 - Dec 2026'],
@@ -39,5 +43,9 @@ class ExperienceSeeder extends Seeder
             'logo' => '/images/ucr.png',
             'type' => 'education',
         ]);
+
+        // Attach skills: Java, C#, PHP, HTML5, CSS3, JavaScript, SQL
+        $skills2 = \App\Models\Skill::whereIn('name', ['Java', 'C#', 'PHP', 'HTML5', 'CSS3', 'JavaScript', 'SQL'])->get();
+        $exp2->skills()->attach($skills2);
     }
 }
