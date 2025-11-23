@@ -8,18 +8,48 @@ const translations = {
         'contact.title': '¿Listo para colaborar?',
         'contact.subtitle': 'Actualmente trabajo part-time como desarrollador backend en el equipo de I+D de la Universidad de Costa Rica.',
         'contact.button': 'Hablemos',
-        'footer': 'Todos los derechos reservados'
+        'footer': 'Todos los derechos reservados',
+        // login page keys
+        'login.title': 'Inicia sesión en tu cuenta',
+        'login.email': 'Dirección de correo',
+        'login.password': 'Contraseña',
+        'login.remember': 'Recuérdame',
+        'login.forgot': '¿Olvidaste tu contraseña?',
+        'login.submit': 'Iniciar sesión',
+        // reset password keys
+        'reset.title': 'Restablecer contraseña',
+        'reset.email': 'Correo electrónico',
+        'reset.new_password': 'Nueva contraseña',
+        'reset.confirm_password': 'Confirmar contraseña',
+        'reset.submit': 'Restablecer contraseña',
+        'reset.back_to_login': 'Volver al inicio de sesión',
+        'reset.enter_new_password': 'Introduce tu nueva contraseña'
     },
     en: {
-        'hero.title': 'Hi, I\'m',
+        'hero.title': "Hi, I'm",
         'hero.contact': 'Contact Me',
         'hero.work': 'View Experience',
         'skills.title': 'Technical Skills',
         'projects.title': 'Experience',
         'contact.title': 'Ready to collaborate?',
         'contact.subtitle': 'Currently working part-time as a backend developer on the I+D team at the University of Costa Rica.',
-        'contact.button': 'Let\'s Talk',
-        'footer': 'All rights reserved'
+        'contact.button': "Let's Talk",
+        'footer': 'All rights reserved',
+        // login page keys
+        'login.title': 'Sign in to your account',
+        'login.email': 'Email address',
+        'login.password': 'Password',
+        'login.remember': 'Remember me',
+        'login.forgot': 'Forgot your password?',
+        'login.submit': 'Sign in',
+        // reset password keys
+        'reset.title': 'Reset Password',
+        'reset.email': 'Email',
+        'reset.new_password': 'New Password',
+        'reset.confirm_password': 'Confirm Password',
+        'reset.submit': 'Reset Password',
+        'reset.back_to_login': 'Back to Login',
+        'reset.enter_new_password': 'Enter your new password'
     }
 };
 
@@ -55,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Translate project titles and descriptions (stored as JSON)
+        // Translate JSON based elements
         document.querySelectorAll('[data-translate-json]').forEach(element => {
             const jsonData = element.getAttribute('data-translate-json');
             try {

@@ -18,4 +18,11 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     
     Route::resource('projects', ProjectController::class);
     Route::resource('skills', SkillController::class);
+    Route::resource('experiences', \App\Http\Controllers\Admin\ExperienceController::class);
+
+    Route::get('/profile', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
 });
+
+Route::get('lang/{locale}', [\App\Http\Controllers\LanguageController::class, 'switch'])->name('lang.switch');
+

@@ -35,6 +35,10 @@ This is a professional portfolio website built with **Laravel** and **TailwindCS
 - **Admin Dashboard** (Protected):
     - Manage Projects (Create, Read, Update, Delete).
     - Manage Skills (Create, Read, Update, Delete).
+    - Manage Experiences (Create, Read, Update, Delete).
+    - Profile management with password change.
+    - Password reset via email.
+    - Real-time form validation.
     - Secure login authentication.
 
 ## Tech Stack
@@ -74,7 +78,25 @@ This is a professional portfolio website built with **Laravel** and **TailwindCS
    php artisan migrate --seed
    ```
 
-5. **Run the Application**:
+5. **Email Configuration (Optional - for password reset)**:
+   To enable password reset functionality, configure email settings in `.env`:
+   
+   **For Gmail**:
+   - Enable 2-factor authentication on your Google account
+   - Create an App Password: https://myaccount.google.com/apppasswords
+   - Update `.env` with:
+     ```env
+     MAIL_MAILER=smtp
+     MAIL_HOST=smtp.gmail.com
+     MAIL_PORT=587
+     MAIL_USERNAME=your-email@gmail.com
+     MAIL_PASSWORD=your-app-password
+     MAIL_ENCRYPTION=tls
+     MAIL_FROM_ADDRESS=your-email@gmail.com
+     MAIL_FROM_NAME="${APP_NAME}"
+     ```
+
+6. **Run the Application**:
    Start the development server:
    ```bash
    npm run dev

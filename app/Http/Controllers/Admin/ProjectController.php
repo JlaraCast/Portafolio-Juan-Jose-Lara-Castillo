@@ -19,24 +19,43 @@ class ProjectController extends Controller
 
     public function create()
     {
-        return view('admin.projects.create');
+        $skills = \App\Models\Skill::all();
+        return view('admin.projects.create', compact('skills'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'image_url' => 'required',
-            'technologies' => 'required', // We will handle JSON conversion
+            'title_es' => 'required',
+            'title_en' => 'required',
+            'description_es' => 'required',
+            'description_en' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'github_url' => 'nullable|url',
+            'live_url' => 'nullable|url',
+            'skills' => 'nullable|array',
         ]);
 
-        // Simple handling for now, assuming technologies is comma separated string from input
-        if (is_string($request->technologies)) {
-            $validated['technologies'] = json_encode(array_map('trim', explode(',', $request->technologies)));
+        // Handle image upload
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('projects', 'public');
+            $imagePath = '/storage/' . $imagePath;
         }
 
-        Project::create($validated);
+        $project = Project::create([
+            'title' => ['es' => $validated['title_es'], 'en' => $validated['title_en']],
+            'description' => ['es' => $validated['description_es'], 'en' => $validated['description_en']],
+            'image_url' => $imagePath,
+            'github_url' => $validated['github_url'] ?? null,
+            'live_url' => $validated['live_url'] ?? null,
+        ]);
+
+        // Attach skills if provided
+        if (!empty($validated['skills'])) {
+            $project->skills()->attach($validated['skills']);
+        }
+
         return redirect()->route('admin.projects.index')->with('success', 'Project created successfully.');
     }
 
@@ -47,25 +66,46 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-        // Decode technologies for the form
-        $project->technologies = implode(', ', json_decode($project->technologies, true) ?? []);
-        return view('admin.projects.edit', compact('project'));
+        $skills = \App\Models\Skill::all();
+        return view('admin.projects.edit', compact('project', 'skills'));
     }
 
     public function update(Request $request, Project $project)
     {
         $validated = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'image_url' => 'required',
-            'technologies' => 'required',
+            'title_es' => 'required',
+            'title_en' => 'required',
+            'description_es' => 'required',
+            'description_en' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'github_url' => 'nullable|url',
+            'live_url' => 'nullable|url',
+            'skills' => 'nullable|array',
         ]);
 
-        if (is_string($request->technologies)) {
-            $validated['technologies'] = json_encode(array_map('trim', explode(',', $request->technologies)));
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('projects', 'public');
+            $imagePath = '/storage/' . $imagePath;
+        } else {
+            $imagePath = $project->image_url; // Keep existing image
         }
 
-        $project->update($validated);
+        $project->update([
+            'title' => ['es' => $validated['title_es'], 'en' => $validated['title_en']],
+            'description' => ['es' => $validated['description_es'], 'en' => $validated['description_en']],
+            'image_url' => $imagePath,
+            'github_url' => $validated['github_url'] ?? null,
+            'live_url' => $validated['live_url'] ?? null,
+        ]);
+
+        // Sync skills
+        if (isset($validated['skills'])) {
+            $project->skills()->sync($validated['skills']);
+        } else {
+            $project->skills()->detach();
+        }
+
         return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
     }
 
