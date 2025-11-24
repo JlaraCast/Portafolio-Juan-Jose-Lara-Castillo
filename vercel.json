@@ -4,6 +4,9 @@
     "functions": {
         "api/**/*.php": {
             "runtime": "vercel-php@0.7.2"
+        },
+        "public/index.php": {
+            "runtime": "vercel-php@0.7.2"
         }
     },
     "rewrites": [
@@ -24,7 +27,7 @@
             "destination": "/public/$1"
         },
         {
-            "source": "/",
+            "source": "/(.*)",
             "destination": "/public/index.php"
         }
     ],
