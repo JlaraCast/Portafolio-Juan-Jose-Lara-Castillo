@@ -4,7 +4,7 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "vercel-build": "mkdir -p public/build && npm run build && curl -sS https://getcomposer.org/installer | php && php composer.phar install --no-dev --optimize-autoloader && php artisan config:clear && php artisan cache:clear && php artisan config:cache && php artisan route:cache && php artisan view:cache",
+        "vercel-build": "npm run build",
         "dev": "vite"
     },
     "devDependencies": {
