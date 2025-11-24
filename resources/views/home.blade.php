@@ -47,6 +47,9 @@
                 </div>
             @endforeach
         </div>
+        <p class="text-center text-gray-500 dark:text-gray-400 mt-6 text-sm">
+            <span data-translate="skills.filter_note">Haz clic en una habilidad para filtrar los proyectos y experiencias relacionados.</span>
+        </p>
     </section>
 
     <!-- Experience Section (Work & Education) -->
