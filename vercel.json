@@ -6,7 +6,7 @@
             "runtime": "vercel-php@0.7.2"
         }
     },
-    "routes": [
+    "rewrites": [
         {
             "src": "/build/(.*)",
             "dest": "/public/build/$1"
