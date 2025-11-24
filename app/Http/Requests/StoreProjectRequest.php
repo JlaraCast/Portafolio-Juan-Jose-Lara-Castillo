@@ -27,6 +27,7 @@ class StoreProjectRequest extends FormRequest
             'description_es' => 'required|string',
             'description_en' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048|dimensions:max_width=2000,max_height=2000',
+            'image_url_input' => 'nullable|url|max:255',
             'github_url' => 'nullable|url|max:255',
             'live_url' => 'nullable|url|max:255',
             'skills' => 'nullable|array',

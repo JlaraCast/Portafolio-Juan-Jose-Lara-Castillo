@@ -54,6 +54,8 @@ class ProjectController extends Controller
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $this->imageService->upload($request->file('image'), 'projects');
+        } elseif (!empty($validated['image_url_input'])) {
+            $imagePath = $validated['image_url_input'];
         }
 
         $project = Project::create([
@@ -113,6 +115,8 @@ class ProjectController extends Controller
                 'projects',
                 $project->image_url
             );
+        } elseif (!empty($validated['image_url_input'])) {
+            $imagePath = $validated['image_url_input'];
         } else {
             $imagePath = $project->image_url; // Keep existing image
         }
