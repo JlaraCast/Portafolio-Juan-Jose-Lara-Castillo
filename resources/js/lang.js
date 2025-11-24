@@ -61,7 +61,7 @@ const translations = {
 
 document.addEventListener('DOMContentLoaded', function () {
     // Get current language from html tag
-    const htmlLang = document.documentElement.lang;
+    const htmlLang = document.documentElement.lang || 'es';
     let currentLang = htmlLang.split('-')[0]; // 'en' or 'es'
 
     // Fallback if not es or en
