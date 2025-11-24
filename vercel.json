@@ -8,18 +8,18 @@
             "runtime": "vercel-php@0.7.4"
         }
     },
-    "routes": [
+    "rewrites": [
         {
-            "src": "/(build|css|js|images|storage)/(.*)",
-            "dest": "/public/$1/$2"
+            "source": "/(build|css|js|images|storage)/(.*)",
+            "destination": "/public/$1/$2"
         },
         {
-            "src": "/(favicon.ico|robots.txt)",
-            "dest": "/public/$1"
+            "source": "/(favicon.ico|robots.txt)",
+            "destination": "/public/$1"
         },
         {
-            "src": "/(.*)",
-            "dest": "/api/index.php"
+            "source": "/(.*)",
+            "destination": "/api/index.php"
         }
     ],
     "env": {
