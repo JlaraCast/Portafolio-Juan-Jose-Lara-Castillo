@@ -13,7 +13,7 @@
     </div>
     
     <div class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 border border-gray-100 dark:border-gray-700">
-        <form action="{{ route('admin.experiences.update', $experience) }}" method="POST" enctype="multipart/form-data" class="space-y-8">
+        <form action="{{ route('admin.experiences.update', $experience) }}" method="POST" enctype="multipart/form-data" class="space-y-8 loading-form">
             @csrf
             @method('PUT')
             
@@ -102,7 +102,7 @@
                     <label for="logo" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Logo') }}</label>
                     @if($experience->logo)
                         <div class="mb-2">
-                            <img src="{{ $experience->logo }}" alt="Current Logo" class="h-16 w-16 object-contain bg-gray-50 dark:bg-gray-700 rounded-lg p-1">
+                            <img src="{{ $experience->logo }}" alt="Current logo for {{ $experience->company['es'] ?? $experience->company['en'] ?? 'company' }}" class="h-16 w-16 object-contain bg-gray-50 dark:bg-gray-700 rounded-lg p-1">
                         </div>
                     @endif
                     <input type="file" name="logo" id="logo" class="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 dark:file:bg-purple-900/30 dark:file:text-purple-300 transition-colors">

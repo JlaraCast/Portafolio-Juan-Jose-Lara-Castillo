@@ -28,7 +28,7 @@
                 <td class="px-6 py-4 whitespace-nowrap">
                     <div class="flex items-center">
                         <div class="flex-shrink-0 h-12 w-12 relative group">
-                            <img class="h-12 w-12 rounded-xl object-cover shadow-sm group-hover:scale-110 transition-transform duration-300" src="{{ $project->image_url }}" alt="">
+                            <img class="h-12 w-12 rounded-xl object-cover shadow-sm group-hover:scale-110 transition-transform duration-300" src="{{ $project->image_url }}" alt="{{ $project->title['es'] ?? $project->title['en'] ?? 'Project thumbnail' }}">
                         </div>
                         <div class="ml-4">
                             <div class="text-sm font-bold text-gray-900 dark:text-white">{{ $project->title[app()->getLocale()] ?? $project->title['en'] ?? $project->title }}</div>

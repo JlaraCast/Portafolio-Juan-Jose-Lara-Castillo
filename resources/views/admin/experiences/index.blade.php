@@ -31,7 +31,7 @@
                     <div class="flex items-center">
                         @if($experience->logo)
                         <div class="flex-shrink-0 h-12 w-12 relative group">
-                            <img class="h-12 w-12 rounded-xl object-contain bg-white p-1 shadow-sm group-hover:scale-110 transition-transform duration-300" src="{{ $experience->logo }}" alt="">
+                            <img class="h-12 w-12 rounded-xl object-contain bg-white p-1 shadow-sm group-hover:scale-110 transition-transform duration-300" src="{{ $experience->logo }}" alt="{{ $experience->company['es'] ?? $experience->company['en'] ?? 'Company logo' }}">
                         </div>
                         @endif
                         <div class="ml-4">

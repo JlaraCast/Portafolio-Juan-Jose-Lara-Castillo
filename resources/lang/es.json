@@ -86,10 +86,18 @@
     "Passwords match": "Las contraseñas coinciden",
     "Passwords do not match": "Las contraseñas no coinciden",
     "characters": "caracteres",
+    "Processing...": "Procesando...",
     "Sign in to your account": "Inicia sesión en tu cuenta",
     "Email address": "Dirección de correo",
     "Remember me": "Recuérdame",
     "Forgot your password?": "¿Olvidaste tu contraseña?",
     "Sign in": "Iniciar sesión",
-    "Login": "Iniciar sesión"
+    "Login": "Iniciar sesión",
+    "reset.title": "Restablecer Contraseña",
+    "reset.enter_new_password": "Ingresa tu nueva contraseña",
+    "reset.email": "Correo Electrónico",
+    "reset.new_password": "Nueva Contraseña",
+    "reset.confirm_password": "Confirmar Contraseña",
+    "reset.submit": "Restablecer Contraseña",
+    "reset.back_to_login": "Volver al Login"
 }

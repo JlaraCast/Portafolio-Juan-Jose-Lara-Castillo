@@ -13,7 +13,7 @@
     </div>
     
     <div class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 border border-gray-100 dark:border-gray-700">
-        <form action="{{ route('admin.skills.store') }}" method="POST" class="space-y-6">
+        <form action="{{ route('admin.skills.store') }}" method="POST" class="space-y-6 loading-form">
             @csrf
             
             <div>

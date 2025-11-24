@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
+    /**
+     * Show the form for editing the user's profile.
+     *
+     * @return \Illuminate\View\View
+     */
     public function edit()
     {
         return view('admin.profile.edit', [
@@ -16,24 +20,16 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    /**
+     * Update the user's profile information.
+     *
+     * @param \App\Http\Requests\UpdateProfileRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(UpdateProfileRequest $request)
     {
         $user = auth()->user();
-
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'password' => [
-                'nullable',
-                'string',
-                'min:8',             // Minimum 8 characters
-                'confirmed',         // Must match password_confirmation
-                'regex:/[a-z]/',      // Must contain at least one lowercase letter
-                'regex:/[A-Z]/',      // Must contain at least one uppercase letter
-                'regex:/[0-9]/',      // Must contain at least one digit
-                'regex:/[@$!%*#?&]/', // Must contain a special character
-            ],
-        ]);
+        $validated = $request->validated();
 
         $user->name = $validated['name'];
         $user->email = $validated['email'];

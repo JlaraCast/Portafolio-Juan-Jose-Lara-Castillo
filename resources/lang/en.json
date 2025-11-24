@@ -86,10 +86,18 @@
     "Passwords match": "Passwords match",
     "Passwords do not match": "Passwords do not match",
     "characters": "characters",
+    "Processing...": "Processing...",
     "Sign in to your account": "Sign in to your account",
     "Email address": "Email address",
     "Remember me": "Remember me",
     "Forgot your password?": "Forgot your password?",
     "Sign in": "Sign in",
-    "Login": "Login"
+    "Login": "Login",
+    "reset.title": "Reset Password",
+    "reset.enter_new_password": "Enter your new password",
+    "reset.email": "Email",
+    "reset.new_password": "New Password",
+    "reset.confirm_password": "Confirm Password",
+    "reset.submit": "Reset Password",
+    "reset.back_to_login": "Back to Login"
 }

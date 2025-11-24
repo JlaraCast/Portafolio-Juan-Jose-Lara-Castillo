@@ -7,6 +7,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * User Model
+ * 
+ * Represents an authenticated user of the portfolio admin panel.
+ * 
+ * @property int $id
+ * @property string $name User's full name
+ * @property string $email User's email address
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string $password Hashed password
+ * @property array|null $subtitle Subtitle in multiple languages (es, en)
+ * @property array|null $description Description in multiple languages (es, en)
+ * @property string|null $hero_image Hero image URL
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */

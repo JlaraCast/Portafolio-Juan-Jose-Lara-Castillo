@@ -13,7 +13,7 @@
     </div>
     
     <div class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 border border-gray-100 dark:border-gray-700">
-        <form action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <form action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data" class="space-y-6 loading-form">
             @csrf
             @method('PUT')
             
@@ -43,7 +43,7 @@
                 <label for="image" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Image') }}</label>
                 @if($project->image_url)
                     <div class="mb-3">
-                        <img src="{{ $project->image_url }}" alt="Current image" class="h-32 w-auto rounded-lg object-cover border border-gray-300 dark:border-gray-600">
+                        <img src="{{ $project->image_url }}" alt="Current image for {{ $project->title['es'] ?? $project->title['en'] ?? 'project' }}" class="h-32 w-auto rounded-lg object-cover border border-gray-300 dark:border-gray-600">
                     </div>
                 @endif
                 <input type="file" name="image" id="image" accept="image/*" class="block w-full text-sm text-gray-900 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 transition-colors">

@@ -3,45 +3,57 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreExperienceRequest;
+use App\Http\Requests\UpdateExperienceRequest;
 use App\Models\Experience;
+use App\Services\ImageUploadService;
 use Illuminate\Http\Request;
 
 class ExperienceController extends Controller
 {
+    /**
+     * Constructor to inject ImageUploadService.
+     */
+    public function __construct(
+        protected ImageUploadService $imageService
+    ) {}
+
+    /**
+     * Display a listing of all experiences.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $experiences = Experience::all();
         return view('admin.experiences.index', compact('experiences'));
     }
 
+    /**
+     * Show the form for creating a new experience.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         $skills = \App\Models\Skill::all();
         return view('admin.experiences.create', compact('skills'));
     }
 
-    public function store(Request $request)
+    /**
+     * Store a newly created experience in the database.
+     *
+     * @param \App\Http\Requests\StoreExperienceRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(StoreExperienceRequest $request)
     {
-        $validated = $request->validate([
-            'company.es' => 'required|string|max:255',
-            'company.en' => 'required|string|max:255',
-            'role.es' => 'required|string|max:255',
-            'role.en' => 'required|string|max:255',
-            'period.es' => 'required|string|max:255',
-            'period.en' => 'required|string|max:255',
-            'location.es' => 'required|string|max:255',
-            'location.en' => 'required|string|max:255',
-            'description.es' => 'required|string',
-            'description.en' => 'required|string',
-            'logo' => 'nullable|image|max:2048', // Max 2MB
-            'type' => 'required|in:work,education',
-            'skills' => 'nullable|array',
-        ]);
+        $validated = $request->validated();
 
+        // Handle logo upload using service
         $logoPath = null;
         if ($request->hasFile('logo')) {
-            $path = $request->file('logo')->store('experiences', 'public');
-            $logoPath = '/storage/' . $path;
+            $logoPath = $this->imageService->upload($request->file('logo'), 'experiences');
         }
 
         $experience = Experience::create([
@@ -62,29 +74,28 @@ class ExperienceController extends Controller
         return redirect()->route('admin.experiences.index')->with('success', 'Experience created successfully.');
     }
 
+    /**
+     * Show the form for editing the specified experience.
+     *
+     * @param \App\Models\Experience $experience
+     * @return \Illuminate\View\View
+     */
     public function edit(Experience $experience)
     {
         $skills = \App\Models\Skill::all();
         return view('admin.experiences.edit', compact('experience', 'skills'));
     }
 
-    public function update(Request $request, Experience $experience)
+    /**
+     * Update the specified experience in the database.
+     *
+     * @param \App\Http\Requests\UpdateExperienceRequest $request
+     * @param \App\Models\Experience $experience
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(UpdateExperienceRequest $request, Experience $experience)
     {
-        $validated = $request->validate([
-            'company.es' => 'required|string|max:255',
-            'company.en' => 'required|string|max:255',
-            'role.es' => 'required|string|max:255',
-            'role.en' => 'required|string|max:255',
-            'period.es' => 'required|string|max:255',
-            'period.en' => 'required|string|max:255',
-            'location.es' => 'required|string|max:255',
-            'location.en' => 'required|string|max:255',
-            'description.es' => 'required|string',
-            'description.en' => 'required|string',
-            'logo' => 'nullable|image|max:2048',
-            'type' => 'required|in:work,education',
-            'skills' => 'nullable|array',
-        ]);
+        $validated = $request->validated();
 
         $data = [
             'company' => $request->company,
@@ -95,9 +106,13 @@ class ExperienceController extends Controller
             'type' => $request->type,
         ];
 
+        // Handle logo upload using service
         if ($request->hasFile('logo')) {
-            $path = $request->file('logo')->store('experiences', 'public');
-            $data['logo'] = '/storage/' . $path;
+            $data['logo'] = $this->imageService->upload(
+                $request->file('logo'),
+                'experiences',
+                $experience->logo
+            );
         }
 
         $experience->update($data);
@@ -112,8 +127,19 @@ class ExperienceController extends Controller
         return redirect()->route('admin.experiences.index')->with('success', 'Experience updated successfully.');
     }
 
+    /**
+     * Remove the specified experience from the database.
+     *
+     * @param \App\Models\Experience $experience
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Experience $experience)
     {
+        // Delete associated logo
+        if ($experience->logo) {
+            $this->imageService->delete($experience->logo);
+        }
+
         $experience->delete();
         return redirect()->route('admin.experiences.index')->with('success', 'Experience deleted successfully.');
     }

@@ -7,10 +7,10 @@
     <div class="max-w-md w-full space-y-8">
         <div>
             <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
-                <span data-translate="reset.title">Reset Password</span>
+                {{ __('reset.title') }}
             </h2>
             <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-                <span data-translate="reset.enter_new_password">Enter your new password</span>
+                {{ __('reset.enter_new_password') }}
             </p>
         </div>
 
@@ -21,7 +21,7 @@
             <div class="rounded-2xl shadow-xl bg-white dark:bg-gray-800 p-8 border border-gray-100 dark:border-gray-700 space-y-6">
                 <div>
                     <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                        <span data-translate="reset.email">Email</span>
+                        {{ __('reset.email') }}
                     </label>
                     <input 
                         id="email" 
@@ -40,7 +40,7 @@
 
                 <div>
                     <label for="password" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                        <span data-translate="reset.new_password">New Password</span>
+                        {{ __('reset.new_password') }}
                     </label>
                     <input 
                         id="password" 
@@ -57,7 +57,7 @@
 
                 <div>
                     <label for="password_confirmation" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                        <span data-translate="reset.confirm_password">Confirm Password</span>
+                        {{ __('reset.confirm_password') }}
                     </label>
                     <input 
                         id="password_confirmation" 
@@ -74,13 +74,13 @@
                         type="submit" 
                         class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-lg shadow-indigo-500/30 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all hover:scale-105"
                     >
-                        <span data-translate="reset.submit">Reset Password</span>
+                        {{ __('reset.submit') }}
                     </button>
                 </div>
 
                 <div class="mt-4 text-center">
                     <a href="{{ route('login') }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
-                        <span data-translate="reset.back_to_login">Back to Login</span>
+                        {{ __('reset.back_to_login') }}
                     </a>
                 </div>
             </div>

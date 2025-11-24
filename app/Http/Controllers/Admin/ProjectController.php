@@ -3,44 +3,57 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Services\ImageUploadService;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Constructor to inject ImageUploadService.
+     */
+    public function __construct(
+        protected ImageUploadService $imageService
+    ) {}
+
+    /**
+     * Display a listing of all projects.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::with('skills')->get();
         return view('admin.projects.index', compact('projects'));
     }
 
+    /**
+     * Show the form for creating a new project.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         $skills = \App\Models\Skill::all();
         return view('admin.projects.create', compact('skills'));
     }
 
-    public function store(Request $request)
+    /**
+     * Store a newly created project in the database.
+     *
+     * @param \App\Http\Requests\StoreProjectRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(StoreProjectRequest $request)
     {
-        $validated = $request->validate([
-            'title_es' => 'required',
-            'title_en' => 'required',
-            'description_es' => 'required',
-            'description_en' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'github_url' => 'nullable|url',
-            'live_url' => 'nullable|url',
-            'skills' => 'nullable|array',
-        ]);
+        $validated = $request->validated();
 
-        // Handle image upload
+        // Handle image upload using service
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('projects', 'public');
-            $imagePath = '/storage/' . $imagePath;
+            $imagePath = $this->imageService->upload($request->file('image'), 'projects');
         }
 
         $project = Project::create([
@@ -59,34 +72,47 @@ class ProjectController extends Controller
         return redirect()->route('admin.projects.index')->with('success', 'Project created successfully.');
     }
 
+    /**
+     * Display the specified project.
+     *
+     * @param \App\Models\Project $project
+     * @return \Illuminate\View\View
+     */
     public function show(Project $project)
     {
         return view('admin.projects.show', compact('project'));
     }
 
+    /**
+     * Show the form for editing the specified project.
+     *
+     * @param \App\Models\Project $project
+     * @return \Illuminate\View\View
+     */
     public function edit(Project $project)
     {
         $skills = \App\Models\Skill::all();
         return view('admin.projects.edit', compact('project', 'skills'));
     }
 
-    public function update(Request $request, Project $project)
+    /**
+     * Update the specified project in the database.
+     *
+     * @param \App\Http\Requests\UpdateProjectRequest $request
+     * @param \App\Models\Project $project
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        $validated = $request->validate([
-            'title_es' => 'required',
-            'title_en' => 'required',
-            'description_es' => 'required',
-            'description_en' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'github_url' => 'nullable|url',
-            'live_url' => 'nullable|url',
-            'skills' => 'nullable|array',
-        ]);
+        $validated = $request->validated();
 
-        // Handle image upload
+        // Handle image upload using service
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('projects', 'public');
-            $imagePath = '/storage/' . $imagePath;
+            $imagePath = $this->imageService->upload(
+                $request->file('image'), 
+                'projects',
+                $project->image_url
+            );
         } else {
             $imagePath = $project->image_url; // Keep existing image
         }
@@ -109,8 +135,19 @@ class ProjectController extends Controller
         return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
     }
 
+    /**
+     * Remove the specified project from the database.
+     *
+     * @param \App\Models\Project $project
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Project $project)
     {
+        // Delete associated image
+        if ($project->image_url) {
+            $this->imageService->delete($project->image_url);
+        }
+
         $project->delete();
         return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
     }

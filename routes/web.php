@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Auth::routes(['register' => false]);
+Route::middleware('throttle:10,1')->group(function () {
+    Auth::routes(['register' => false]);
+});
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
