@@ -60,33 +60,20 @@ const translations = {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    const langToggleBtn = document.getElementById('lang-toggle');
-    const langEs = document.getElementById('lang-es');
-    const langEn = document.getElementById('lang-en');
+    // Get current language from html tag
+    const htmlLang = document.documentElement.lang;
+    let currentLang = htmlLang.split('-')[0]; // 'en' or 'es'
 
-    if (!langToggleBtn || !langEs || !langEn) {
-        return;
-    }
-
-    // Get current language from localStorage or default to Spanish
-    let currentLang = localStorage.getItem('language') || 'es';
-
-    // Update button display
-    function updateLangButton() {
-        if (currentLang === 'es') {
-            langEs.classList.remove('hidden');
-            langEn.classList.add('hidden');
-        } else {
-            langEs.classList.add('hidden');
-            langEn.classList.remove('hidden');
-        }
+    // Fallback if not es or en
+    if (currentLang !== 'es' && currentLang !== 'en') {
+        currentLang = 'es';
     }
 
     // Translate all elements with data-translate attribute
     function translatePage() {
         document.querySelectorAll('[data-translate]').forEach(element => {
             const key = element.getAttribute('data-translate');
-            if (translations[currentLang][key]) {
+            if (translations[currentLang] && translations[currentLang][key]) {
                 element.textContent = translations[currentLang][key];
             }
         });
@@ -98,6 +85,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 const data = JSON.parse(jsonData);
                 if (data[currentLang]) {
                     element.textContent = data[currentLang];
+                } else if (data['es']) {
+                    // Fallback to Spanish if current lang not found in JSON
+                    element.textContent = data['es'];
                 }
             } catch (e) {
                 console.error('Error parsing translation JSON:', e);
@@ -106,15 +96,36 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Initialize
-    updateLangButton();
     translatePage();
+    console.log('Language initialized to:', currentLang);
 
-    // Toggle language on click
-    langToggleBtn.addEventListener('click', function () {
-        currentLang = currentLang === 'es' ? 'en' : 'es';
-        localStorage.setItem('language', currentLang);
+    // Optional: Keep the toggle logic if the elements exist
+    const langToggleBtn = document.getElementById('lang-toggle');
+    const langEs = document.getElementById('lang-es');
+    const langEn = document.getElementById('lang-en');
+
+    if (langToggleBtn && langEs && langEn) {
+        // Update button display
+        function updateLangButton() {
+            if (currentLang === 'es') {
+                langEs.classList.remove('hidden');
+                langEn.classList.add('hidden');
+            } else {
+                langEs.classList.add('hidden');
+                langEn.classList.remove('hidden');
+            }
+        }
+
         updateLangButton();
-        translatePage();
-        console.log('Language switched to:', currentLang);
-    });
+
+        // Toggle language on click
+        langToggleBtn.addEventListener('click', function () {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            // We don't set localStorage here because we want to rely on server-side session
+            // But if this button is used for client-side only switching:
+            updateLangButton();
+            translatePage();
+            console.log('Language switched to:', currentLang);
+        });
+    }
 });
