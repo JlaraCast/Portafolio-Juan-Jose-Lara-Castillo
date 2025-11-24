@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
         themeToggleDarkIcon.classList.toggle('hidden');
         themeToggleLightIcon.classList.toggle('hidden');
 
-        // Toggle theme
-        if (localStorage.theme === 'dark') {
+        // Toggle theme based on current class presence
+        if (document.documentElement.classList.contains('dark')) {
             document.documentElement.classList.remove('dark');
             localStorage.theme = 'light';
         } else {
