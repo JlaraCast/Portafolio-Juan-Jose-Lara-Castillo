@@ -8,24 +8,24 @@
     },
     "rewrites": [
         {
-            "src": "/build/(.*)",
-            "dest": "/public/build/$1"
+            "source": "/build/(.*)",
+            "destination": "/public/build/$1"
         },
         {
-            "src": "/images/(.*)",
-            "dest": "/public/images/$1"
+            "source": "/images/(.*)",
+            "destination": "/public/images/$1"
         },
         {
-            "src": "/favicon.ico",
-            "dest": "/public/favicon.ico"
+            "source": "/favicon.ico",
+            "destination": "/public/favicon.ico"
         },
         {
-            "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
-            "dest": "/public/$1"
+            "source": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)",
+            "destination": "/public/$1"
         },
         {
-            "src": "/",
-            "dest": "/public/index.php"
+            "source": "/",
+            "destination": "/public/index.php"
         }
     ],
     "headers": [
