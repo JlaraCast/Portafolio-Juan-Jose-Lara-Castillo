@@ -97,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize
     translatePage();
-    console.log('Language initialized to:', currentLang);
 
     // Optional: Keep the toggle logic if the elements exist
     const langToggleBtn = document.getElementById('lang-toggle');
