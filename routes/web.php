@@ -28,3 +28,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 Route::get('lang/{locale}', [\App\Http\Controllers\LanguageController::class, 'switch'])->name('lang.switch');
 
+Route::get('/test-migrate', function () {
+    \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+    return 'Migrations run successfully';
+});
+
