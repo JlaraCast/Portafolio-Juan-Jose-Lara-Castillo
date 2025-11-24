@@ -3,26 +3,22 @@
     "framework": null,
     "buildCommand": "npm run build",
     "functions": {
-        "api/**/*.php": {
+        "api/index.php": {
             "runtime": "vercel-php@0.7.2"
         }
     },
     "rewrites": [
         {
-            "source": "/build/(.*)",
-            "destination": "/public/build/$1"
-        },
-        {
-            "source": "/images/(.*)",
-            "destination": "/public/images/$1"
+            "source": "/(css|js|images|build|storage)/(.*)",
+            "destination": "/public/$1/$2"
         },
         {
             "source": "/favicon.ico",
             "destination": "/public/favicon.ico"
         },
         {
-            "source": "/(.*\\.(?:css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
-            "destination": "/public/$1"
+            "source": "/robots.txt",
+            "destination": "/public/robots.txt"
         },
         {
             "source": "/(.*)",
