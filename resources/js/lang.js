@@ -61,7 +61,7 @@ const translations = {
 
 document.addEventListener('DOMContentLoaded', function () {
     // Get current language from html tag
-    const htmlLang = document.documentElement.lang;
+    const htmlLang = document.documentElement.lang || 'es';
     let currentLang = htmlLang.split('-')[0]; // 'en' or 'es'
 
     // Fallback if not es or en
@@ -120,11 +120,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Toggle language on click
         langToggleBtn.addEventListener('click', function () {
             currentLang = currentLang === 'es' ? 'en' : 'es';
-            // We don't set localStorage here because we want to rely on server-side session
-            // But if this button is used for client-side only switching:
+            // We don't set localStorage here; this language switch is purely client-side and does not communicate with the server.
+            // If you want to persist the language selection, consider using localStorage or syncing with the server.
             updateLangButton();
             translatePage();
-            console.log('Language switched to:', currentLang);
         });
     }
 });
