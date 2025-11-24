@@ -11,7 +11,10 @@
     "routes": [
         {
             "src": "/((?:build|storage|images|js|css|robots\\.txt|favicon\\.ico).*)",
-            "dest": "/$1"
+            "dest": "/$1",
+            "headers": {
+                "Access-Control-Allow-Origin": "*"
+            }
         },
         {
             "src": "/(.*)",
