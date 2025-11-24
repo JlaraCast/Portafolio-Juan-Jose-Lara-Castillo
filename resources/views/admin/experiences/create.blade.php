@@ -98,9 +98,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="logo" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Logo') }}</label>
+                    <label for="logo" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Logo Upload') }}</label>
                     <input type="file" name="logo" id="logo" class="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 dark:file:bg-purple-900/30 dark:file:text-purple-300 transition-colors">
-                    <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Upload an image (JPG, PNG, max 2MB).') }}</p>
+                    <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Upload an image (JPG, PNG, max 2MB). Note: On Vercel, file uploads are read-only. Use the URL field below for production.') }}</p>
+                    
+                    <label for="logo_url_input" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mt-4 mb-2">{{ __('Or Logo URL') }}</label>
+                    <input type="url" name="logo_url_input" id="logo_url_input" placeholder="https://example.com/logo.png" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors">
                 </div>
 
                 <div>

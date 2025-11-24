@@ -33,6 +33,7 @@ class StoreExperienceRequest extends FormRequest
             'description.es' => 'required|string',
             'description.en' => 'required|string',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048|dimensions:max_width=500,max_height=500',
+            'logo_url_input' => 'nullable|url|max:255',
             'type' => 'required|in:work,education',
             'skills' => 'nullable|array',
             'skills.*' => 'exists:skills,id',

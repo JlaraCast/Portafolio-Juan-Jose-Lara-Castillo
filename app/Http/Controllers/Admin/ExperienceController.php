@@ -54,6 +54,8 @@ class ExperienceController extends Controller
         $logoPath = null;
         if ($request->hasFile('logo')) {
             $logoPath = $this->imageService->upload($request->file('logo'), 'experiences');
+        } elseif (!empty($validated['logo_url_input'])) {
+            $logoPath = $validated['logo_url_input'];
         }
 
         $experience = Experience::create([
@@ -113,6 +115,8 @@ class ExperienceController extends Controller
                 'experiences',
                 $experience->logo
             );
+        } elseif (!empty($validated['logo_url_input'])) {
+            $data['logo'] = $validated['logo_url_input'];
         }
 
         $experience->update($data);
