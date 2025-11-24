@@ -125,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function () {
             // If you want to persist the language selection, consider using localStorage or syncing with the server.
             updateLangButton();
             translatePage();
-            console.log('Language switched to:', currentLang);
         });
     }
 });
