@@ -30,12 +30,5 @@
         "SESSION_DRIVER": "cookie",
         "LOG_CHANNEL": "stderr",
         "ASSET_URL": "https://${VERCEL_URL}"
-    },
-    "exclude": [
-        "node_modules",
-        "public/storage",
-        "resources/assets",
-        "storage",
-        "tests"
-    ]
+    }
 }
