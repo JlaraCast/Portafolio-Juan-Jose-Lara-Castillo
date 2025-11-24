@@ -119,11 +119,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Toggle language on click
         langToggleBtn.addEventListener('click', function () {
-            currentLang = currentLang === 'es' ? 'en' : 'es';
-            // We don't set localStorage here; this language switch is purely client-side and does not communicate with the server.
-            // If you want to persist the language selection, consider using localStorage or syncing with the server.
-            updateLangButton();
-            translatePage();
+            const newLang = currentLang === 'es' ? 'en' : 'es';
+            // Redirect to the language switch route to update session and reload
+            window.location.href = '/lang/' + newLang;
         });
     }
 });
