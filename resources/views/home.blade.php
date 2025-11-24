@@ -77,7 +77,7 @@
                         @endif
                         <div class="flex flex-wrap gap-2 mt-4">
                             @foreach($experience->skills as $skill)
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 dark:bg-indigo-900/30 text-emerald-700 dark:text-indigo-300 border border-emerald-100 dark:border-indigo-800">
+                                <span class="skill-badge inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 dark:bg-indigo-900/30 text-emerald-700 dark:text-indigo-300 border border-emerald-100 dark:border-indigo-800 transition-colors duration-300" data-skill-id="{{ $skill->id }}">
                                     {{ $skill->name }}
                                 </span>
                             @endforeach
@@ -115,7 +115,7 @@
                         <p class="text-gray-700 dark:text-gray-400 mb-4 flex-1" data-translate-json="{{ json_encode($project->description) }}">{{ $project->description['es'] ?? '' }}</p>
                         <div class="flex flex-wrap gap-2 mt-auto">
                             @foreach($project->skills as $skill)
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 dark:bg-indigo-900/30 text-emerald-700 dark:text-indigo-300 border border-emerald-100 dark:border-indigo-800">
+                                <span class="skill-badge inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 dark:bg-indigo-900/30 text-emerald-700 dark:text-indigo-300 border border-emerald-100 dark:border-indigo-800 transition-colors duration-300" data-skill-id="{{ $skill->id }}">
                                     {{ $skill->name }}
                                 </span>
                             @endforeach
@@ -212,6 +212,7 @@
         const skills = document.querySelectorAll('.skill-card');
         const projects = document.querySelectorAll('.project-card');
         const experiences = document.querySelectorAll('.experience-card');
+        const skillBadges = document.querySelectorAll('.skill-badge');
 
         // Toggle active state
         if (activeSkillIds.has(skillId)) {
@@ -221,6 +222,18 @@
             activeSkillIds.add(skillId);
             element.classList.add('ring-2', 'ring-emerald-500', 'dark:ring-indigo-500', 'bg-emerald-50', 'dark:bg-indigo-900/20');
         }
+
+        // Highlight badges
+        skillBadges.forEach(badge => {
+            const badgeId = parseInt(badge.getAttribute('data-skill-id'));
+            if (activeSkillIds.has(badgeId)) {
+                 badge.classList.remove('bg-emerald-50', 'dark:bg-indigo-900/30', 'text-emerald-700', 'dark:text-indigo-300', 'border-emerald-100', 'dark:border-indigo-800');
+                 badge.classList.add('bg-emerald-600', 'dark:bg-indigo-600', 'text-white', 'border-transparent');
+            } else {
+                 badge.classList.add('bg-emerald-50', 'dark:bg-indigo-900/30', 'text-emerald-700', 'dark:text-indigo-300', 'border-emerald-100', 'dark:border-indigo-800');
+                 badge.classList.remove('bg-emerald-600', 'dark:bg-indigo-600', 'text-white', 'border-transparent');
+            }
+        });
 
         // Filter items
         if (activeSkillIds.size === 0) {
