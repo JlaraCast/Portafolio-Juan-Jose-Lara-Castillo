@@ -13,8 +13,7 @@ return new class extends Migration
     {
         // Add indexes to projects table for better search performance
         Schema::table('projects', function (Blueprint $table) {
-            $table->index('title_es');
-            $table->index('title_en');
+            $table->index('title');
         });
 
         // Add index to skills table
@@ -34,8 +33,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->dropIndex(['title_es']);
-            $table->dropIndex(['title_en']);
+            $table->dropIndex(['title']);
         });
 
         Schema::table('skills', function (Blueprint $table) {

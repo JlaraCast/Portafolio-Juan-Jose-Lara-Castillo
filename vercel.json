@@ -28,7 +28,6 @@
         "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_DRIVER": "array",
         "SESSION_DRIVER": "cookie",
-        "LOG_CHANNEL": "stderr",
-        "ASSET_URL": "https://${VERCEL_URL}"
+        "LOG_CHANNEL": "stderr"
     }
 }
