@@ -7,6 +7,8 @@ class DeleteModal {
     constructor() {
         // Prevent multiple instances (singleton pattern)
         if (DeleteModal.instance) {
+            // Retry initialization in case it failed previously (e.g. DOM wasn't ready)
+            DeleteModal.instance.init();
             return DeleteModal.instance;
         }
         
@@ -50,7 +52,7 @@ class DeleteModal {
                 
                 const url = deleteBtn.dataset.url;
                 const title = deleteBtn.dataset.title;
-                const message = deleteBtn.dataset.message || deleteBtn.dataset.confirmDelete;
+                const message = deleteBtn.dataset.confirmDelete;
                 
                 this.open(url, title, message);
             }
@@ -90,32 +92,6 @@ class DeleteModal {
 
         // Close on escape key
         document.addEventListener('keydown', this.handleEscape);
-    }
-
-    destroy() {
-        // Cleanup event listeners
-        if (this.handleClick) {
-            document.removeEventListener('click', this.handleClick, true); // Match the capture phase
-        }
-        if (this.handleEscape) {
-            document.removeEventListener('keydown', this.handleEscape);
-        }
-        
-        if (this.cancelBtn && this.handleClose) {
-            this.cancelBtn.removeEventListener('click', this.handleClose);
-        }
-
-        if (this.closeBtn && this.handleClose) {
-            this.closeBtn.removeEventListener('click', this.handleClose);
-        }
-
-        if (this.modal && this.handleOutsideClick) {
-            this.modal.removeEventListener('click', this.handleOutsideClick);
-        }
-
-        // Clear singleton instance
-        DeleteModal.instance = null;
-        this.initialized = false;
     }
 
     open(url, title, message) {

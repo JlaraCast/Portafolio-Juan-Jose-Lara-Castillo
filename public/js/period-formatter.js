@@ -52,9 +52,9 @@ class PeriodFormatter {
         };
 
         // Listen to changes
-        startDateInput?.addEventListener('change', this.boundHandlers.updatePeriods);
-        endDateInput?.addEventListener('change', this.boundHandlers.updatePeriods);
-        currentCheckbox?.addEventListener('change', this.boundHandlers.toggleAndUpdate);
+        startDateInput.addEventListener('change', this.boundHandlers.updatePeriods);
+        endDateInput.addEventListener('change', this.boundHandlers.updatePeriods);
+        currentCheckbox.addEventListener('change', this.boundHandlers.toggleAndUpdate);
 
         // Initial state
         this.toggleEndDate();
