@@ -177,7 +177,9 @@ class PeriodFormatter {
     parsePeriodString(periodString, language) {
         if (!periodString) return null;
 
-        const presentKeywords = language === 'es' ? ['presente'] : ['present', 'current'];
+        // Keywords to identify "current" status (case-insensitive)
+        // 'actualidad' is added as a common synonym in Spanish contexts
+        const presentKeywords = language === 'es' ? ['presente', 'actualidad'] : ['present', 'current'];
 
         // Split by dash to get start and end parts
         const parts = periodString.split('-').map(p => p.trim().toLowerCase());
@@ -265,6 +267,9 @@ class PeriodFormatter {
 
     /**
      * Remove event listeners to prevent memory leaks
+     * Note: In a standard Multi-Page Application (MPA), this is automatically handled
+     * by the browser on page navigation. This method is provided for cases where
+     * the form might be removed/replaced dynamically (SPA/AJAX).
      */
     destroy() {
         if (!this.initialized) return;
@@ -289,4 +294,4 @@ class PeriodFormatter {
 }
 
 // Initialize
-new PeriodFormatter();
+window.periodFormatter = new PeriodFormatter();

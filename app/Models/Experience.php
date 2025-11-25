@@ -131,6 +131,6 @@ class Experience extends Model
         if (empty($this->period['en'])) {
             return false;
         }
-        return stripos($this->period['en'], 'Present') !== false || stripos($this->period['en'], 'Current') !== false;
+        return stripos($this->period['en'], 'Present') !== false;
     }
 }
