@@ -54,13 +54,35 @@ class DeleteModal {
                 const title = deleteBtn.dataset.title;
                 const message = deleteBtn.dataset.confirmDelete;
                 
-                this.open(url, title, message);
+                this.open(url, title, message, deleteBtn);
             }
         };
 
         this.handleEscape = (e) => {
             if (e.key === 'Escape' && this.modal && !this.modal.classList.contains('hidden')) {
                 this.close();
+            }
+        };
+
+        this.handleTab = (e) => {
+            if (e.key === 'Tab' && this.modal && !this.modal.classList.contains('hidden')) {
+                const focusableElements = this.modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                if (focusableElements.length === 0) return;
+
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+
+                if (e.shiftKey) {
+                    if (document.activeElement === firstElement) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    }
+                } else {
+                    if (document.activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
             }
         };
 
@@ -92,9 +114,12 @@ class DeleteModal {
 
         // Close on escape key
         document.addEventListener('keydown', this.handleEscape);
+        
+        // Trap focus within modal
+        document.addEventListener('keydown', this.handleTab);
     }
 
-    open(url, title, message) {
+    open(url, title, message, triggerElement = null) {
         if (!this.modal || !this.form) {
             return;
         }
@@ -103,6 +128,7 @@ class DeleteModal {
         this.form.action = url;
 
         // Update text content
+        // Use textContent instead of innerHTML to prevent XSS attacks
         if (this.modalTitle && title) {
             this.modalTitle.textContent = title;
         }
@@ -117,6 +143,14 @@ class DeleteModal {
         
         // Prevent body scrolling
         document.body.style.overflow = 'hidden';
+
+        // Store trigger element to restore focus later
+        this.triggerElement = triggerElement;
+
+        // Focus management: set focus to cancel button by default
+        if (this.cancelBtn) {
+            this.cancelBtn.focus();
+        }
     }
 
     close() {
@@ -127,6 +161,12 @@ class DeleteModal {
         
         // Restore body scrolling
         document.body.style.overflow = '';
+
+        // Restore focus to the element that opened the modal
+        if (this.triggerElement) {
+            this.triggerElement.focus();
+            this.triggerElement = null;
+        }
     }
 }
 
