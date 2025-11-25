@@ -62,26 +62,30 @@ class DeleteModal {
             }
         };
 
+        this.handleClose = () => this.close();
+
+        this.handleOutsideClick = (e) => {
+            if (e.target === this.modal || e.target.hasAttribute('data-modal-overlay')) {
+                this.close();
+            }
+        };
+
         // Use event delegation for delete buttons
         // We attach to document to catch clicks on any delete button, even dynamically added ones
         document.addEventListener('click', this.handleClick, true); // Use capture phase to ensure we catch the event before other handlers
 
         // Close modal when clicking cancel or close buttons
         if (this.cancelBtn) {
-            this.cancelBtn.addEventListener('click', () => this.close());
+            this.cancelBtn.addEventListener('click', this.handleClose);
         }
 
         if (this.closeBtn) {
-            this.closeBtn.addEventListener('click', () => this.close());
+            this.closeBtn.addEventListener('click', this.handleClose);
         }
 
         // Close modal when clicking outside
         if (this.modal) {
-            this.modal.addEventListener('click', (e) => {
-                if (e.target === this.modal || e.target.hasAttribute('data-modal-overlay')) {
-                    this.close();
-                }
-            });
+            this.modal.addEventListener('click', this.handleOutsideClick);
         }
 
         // Close on escape key
@@ -97,6 +101,18 @@ class DeleteModal {
             document.removeEventListener('keydown', this.handleEscape);
         }
         
+        if (this.cancelBtn && this.handleClose) {
+            this.cancelBtn.removeEventListener('click', this.handleClose);
+        }
+
+        if (this.closeBtn && this.handleClose) {
+            this.closeBtn.removeEventListener('click', this.handleClose);
+        }
+
+        if (this.modal && this.handleOutsideClick) {
+            this.modal.removeEventListener('click', this.handleOutsideClick);
+        }
+
         // Clear singleton instance
         DeleteModal.instance = null;
         this.initialized = false;

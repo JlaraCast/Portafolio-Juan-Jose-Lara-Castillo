@@ -225,7 +225,9 @@ class PeriodFormatter {
         if (parts.length < 2) return null;
 
         const monthPart = parts[0].toLowerCase().replace('.', '').trim();
-        const yearPart = parts[parts.length - 1];
+        const yearPart = parts[parts.length - 1].trim();
+        // Validate year part: must be exactly 4 digits
+        if (!/^\d{4}$/.test(yearPart)) return null;
 
         // Find month index with exact match (after normalizing)
         let monthIndex = -1;
