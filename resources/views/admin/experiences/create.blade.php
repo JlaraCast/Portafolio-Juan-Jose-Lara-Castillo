@@ -16,6 +16,30 @@
         <form action="{{ route('admin.experiences.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8 loading-form">
             @csrf
             
+            <!-- Period Selector -->
+            <div class="border-b border-gray-100 dark:border-gray-700 pb-6">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                    <svg class="w-6 h-6 mr-3 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    {{ __('Period') }}
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="start_date" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Start Date') }}</label>
+                        <input type="month" id="start_date" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" required>
+                    </div>
+                    <div id="end_date_container">
+                        <label for="end_date" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('End Date') }}</label>
+                        <input type="month" id="end_date" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors">
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" id="is_current" class="rounded border-gray-300 dark:border-gray-600 text-purple-600 focus:ring-purple-500 dark:bg-gray-700">
+                        <span class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('I currently work/study here') }}</span>
+                    </label>
+                </div>
+            </div>
+
             <!-- Spanish Fields -->
             <div class="border-b border-gray-100 dark:border-gray-700 pb-6">
                 <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
@@ -35,8 +59,8 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="period_es" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Period (ES)') }}</label>
-                            <input type="text" name="period[es]" id="period_es" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" required>
+                            <label for="period_es" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Period (ES)') }} <span class="text-xs text-gray-500 dark:text-gray-400">({{ __('Auto-generated') }})</span></label>
+                            <input type="text" name="period[es]" id="period_es" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors bg-gray-50 dark:bg-gray-900" readonly required>
                         </div>
                         <div>
                             <label for="location_es" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Location (ES)') }}</label>
@@ -69,8 +93,8 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="period_en" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Period (EN)') }}</label>
-                            <input type="text" name="period[en]" id="period_en" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" required>
+                            <label for="period_en" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Period (EN)') }} <span class="text-xs text-gray-500 dark:text-gray-400">({{ __('Auto-generated') }})</span></label>
+                            <input type="text" name="period[en]" id="period_en" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors bg-gray-50 dark:bg-gray-900" readonly required>
                         </div>
                         <div>
                             <label for="location_en" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Location (EN)') }}</label>
@@ -122,4 +146,6 @@
         </form>
     </div>
 </div>
+
+<script src="{{ asset('js/period-formatter.js') }}"></script>
 @endsection

@@ -129,7 +129,9 @@
             confirmDelete: "{{ __('Confirm Delete') }}",
             confirmDeleteMessage: "{{ __('Are you sure you want to delete this item? This action cannot be undone.') }}",
             delete: "{{ __('Delete') }}",
-            cancel: "{{ __('Cancel') }}"
+            cancel: "{{ __('Cancel') }}",
+            present: "{{ __('Present') }}",
+            present_en: "Present"
         };
     </script>
     

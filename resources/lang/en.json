@@ -120,5 +120,10 @@
     "Are you sure you want to delete this item? This action cannot be undone.": "Are you sure you want to delete this item? This action cannot be undone.",
     "Are you sure you want to delete this project? This action cannot be undone.": "Are you sure you want to delete this project? This action cannot be undone.",
     "Are you sure you want to delete this skill? This action cannot be undone.": "Are you sure you want to delete this skill? This action cannot be undone.",
-    "Are you sure you want to delete this experience? This action cannot be undone.": "Are you sure you want to delete this experience? This action cannot be undone."
+    "Are you sure you want to delete this experience? This action cannot be undone.": "Are you sure you want to delete this experience? This action cannot be undone.",
+    "Start Date": "Start Date",
+    "End Date": "End Date",
+    "I currently work/study here": "I currently work/study here",
+    "Auto-generated": "Auto-generated",
+    "Present": "Present"
 }
