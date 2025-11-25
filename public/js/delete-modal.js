@@ -23,97 +23,66 @@ class DeleteModal {
         // Prevent multiple initializations
         if (this.initialized) return;
         
+        // Find the modal element in the DOM
         this.modal = document.getElementById('deleteModal');
-        if (this.modal) {
-            // Store default message for resetting later
-            const messageEl = document.getElementById('modalMessage');
-            if (messageEl) {
-                this.defaultMessage = messageEl.textContent.trim();
-            }
-
-            this.attachEventListeners();
-            this.initialized = true;
-            console.log('DeleteModal: Initialized successfully with existing DOM element');
-        } else {
-            console.error('DeleteModal: Modal element #deleteModal not found in DOM');
+        
+        if (!this.modal) {
+            return;
         }
+
+        this.form = document.getElementById('deleteForm');
+        this.modalTitle = document.getElementById('modalTitle');
+        this.modalMessage = document.getElementById('modalMessage');
+        this.cancelBtn = document.getElementById('cancelDelete');
+        this.closeBtn = document.getElementById('closeModal');
+
+        this.attachEventListeners();
     }
 
     attachEventListeners() {
-        // Use delegation on document for better reliability
-        this.handleClick = (e) => {
-            // Check if the clicked element or its parent has the data attribute
-            // Check matches first for direct clicks, then closest for nested elements
-            // Also handle cases where e.target might not support matches/closest (e.g. text nodes)
-            let deleteBtn = null;
-            
-            if (e.target.matches && e.target.matches('[data-confirm-delete]')) {
-                deleteBtn = e.target;
-            } else if (e.target.closest) {
-                deleteBtn = e.target.closest('[data-confirm-delete]');
-            }
+        // Use event delegation for delete buttons
+        // We attach to document to catch clicks on any delete button, even dynamically added ones
+        document.addEventListener('click', (e) => {
+            // Check if the clicked element or its parent is a delete button
+            const deleteBtn = e.target.closest('.delete-record');
             
             if (deleteBtn) {
-                console.log('DeleteModal: Delete button clicked', deleteBtn);
                 e.preventDefault();
                 e.stopPropagation();
                 
-                const form = deleteBtn.closest('form');
-                console.log('DeleteModal: Found form', form);
+                const id = deleteBtn.dataset.id;
+                const url = deleteBtn.dataset.url;
+                const title = deleteBtn.dataset.title;
+                const message = deleteBtn.dataset.message;
                 
-                if (!form) {
-                    console.error('DeleteModal: No form found for delete button');
-                    return;
-                }
-                
-                const message = deleteBtn.getAttribute('data-confirm-delete');
-                console.log('DeleteModal: Message', message);
-                this.show(form, message);
+                this.open(id, url, title, message);
             }
-        };
+        }, true); // Use capture phase to ensure we catch the event before other handlers
+
+        // Close modal when clicking cancel or close buttons
+        if (this.cancelBtn) {
+            this.cancelBtn.addEventListener('click', () => this.close());
+        }
         
-        // Attach click handler to document for better event delegation
-        document.addEventListener('click', this.handleClick, true); // Use capture phase
-        console.log('DeleteModal: Click handler attached to document');
-
-        // Cancel button
-        const cancelBtn = document.getElementById('cancelDelete');
-        if (cancelBtn) {
-            cancelBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.hide();
-            });
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', () => this.close());
         }
 
-        // Backdrop click
-        const backdrop = document.getElementById('modalBackdrop');
-        if (backdrop) {
-            backdrop.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.hide();
-            });
-        }
-
-        // Confirm button
-        const confirmBtn = document.getElementById('confirmDelete');
-        if (confirmBtn) {
-            confirmBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                console.log('DeleteModal: Confirm clicked, submitting form', this.currentForm);
-                if (this.currentForm) {
-                    this.currentForm.submit();
+        // Close modal when clicking outside
+        if (this.modal) {
+            this.modal.addEventListener('click', (e) => {
+                if (e.target === this.modal) {
+                    this.close();
                 }
-                this.hide();
             });
         }
 
-        // ESC key to close
-        this.handleEscape = (e) => {
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.modal && !this.modal.classList.contains('hidden')) {
-                this.hide();
+                this.close();
             }
-        };
-        document.addEventListener('keydown', this.handleEscape);
+        });
     }
 
     destroy() {
@@ -167,6 +136,41 @@ class DeleteModal {
             modalMessage.textContent = this.defaultMessage;
         }
     }
+
+    open(id, url, title, message) {
+        if (!this.modal || !this.form) {
+            return;
+        }
+
+        // Update form action
+        this.form.action = url;
+
+        // Update text content
+        if (this.modalTitle && title) {
+            this.modalTitle.textContent = title;
+        }
+        
+        if (this.modalMessage && message) {
+            this.modalMessage.textContent = message;
+        }
+
+        // Show modal
+        this.modal.classList.remove('hidden');
+        this.modal.classList.add('flex');
+        
+        // Prevent body scrolling
+        document.body.style.overflow = 'hidden';
+    }
+
+    close() {
+        if (!this.modal) return;
+
+        this.modal.classList.add('hidden');
+        this.modal.classList.remove('flex');
+        
+        // Restore body scrolling
+        document.body.style.overflow = '';
+    }
 }
 
 // Initialize singleton instance
@@ -175,10 +179,8 @@ DeleteModal.instance = null;
 // Initialize on DOM ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        console.log('DeleteModal: Initializing on DOMContentLoaded');
         window.deleteModal = new DeleteModal();
     });
 } else {
-    console.log('DeleteModal: Initializing immediately (DOM already loaded)');
     window.deleteModal = new DeleteModal();
 }

@@ -177,7 +177,6 @@ class PeriodFormatter {
     parsePeriodString(periodString, language) {
         if (!periodString) return null;
 
-        const months = language === 'es' ? this.months_es_abbr : this.months_en_abbr;
         const presentKeywords = language === 'es' ? ['actualidad', 'presente'] : ['present', 'current'];
 
         // Split by dash to get start and end parts
@@ -186,7 +185,7 @@ class PeriodFormatter {
         if (parts.length === 0) return null;
 
         // Parse start date
-        const startDate = this.parseDateFromString(parts[0], months);
+        const startDate = this.parseDateFromString(parts[0], language);
         
         if (!startDate) return null;
 
@@ -201,7 +200,7 @@ class PeriodFormatter {
                 isCurrent = true;
             } else {
                 // Try to parse as end date
-                endDate = this.parseDateFromString(parts[1], months);
+                endDate = this.parseDateFromString(parts[1], language);
             }
         }
 
@@ -214,8 +213,11 @@ class PeriodFormatter {
      * @param {Array} months - Array of month names/abbreviations
      * @returns {string|null} - Date in YYYY-MM format, or null if parsing fails
      */
-    parseDateFromString(dateString, months) {
+    parseDateFromString(dateString, language) {
         if (!dateString) return null;
+
+        const monthsFull = language === 'es' ? this.months_es : this.months_en;
+        const monthsAbbr = language === 'es' ? this.months_es_abbr : this.months_en_abbr;
 
         // Match pattern: month year
         const parts = dateString.trim().split(/\s+/);
@@ -228,11 +230,23 @@ class PeriodFormatter {
         // Find month index with exact match (after normalizing)
         let monthIndex = -1;
         
-        for (let i = 0; i < months.length; i++) {
-            const normalizedMonth = months[i].toLowerCase().replace('.', '').trim();
+        // Check full names first
+        for (let i = 0; i < monthsFull.length; i++) {
+            const normalizedMonth = monthsFull[i].toLowerCase().trim();
             if (monthPart === normalizedMonth) {
                 monthIndex = i;
                 break;
+            }
+        }
+
+        // If not found, check abbreviations
+        if (monthIndex === -1) {
+            for (let i = 0; i < monthsAbbr.length; i++) {
+                const normalizedMonth = monthsAbbr[i].toLowerCase().replace('.', '').trim();
+                if (monthPart === normalizedMonth) {
+                    monthIndex = i;
+                    break;
+                }
             }
         }
 
