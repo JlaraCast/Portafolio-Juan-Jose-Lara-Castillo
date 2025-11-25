@@ -222,14 +222,15 @@ class PeriodFormatter {
         
         if (parts.length < 2) return null;
 
-        const monthPart = parts[0].toLowerCase();
+        const monthPart = parts[0].toLowerCase().replace('.', '').trim();
         const yearPart = parts[parts.length - 1];
 
-        // Find month index
+        // Find month index with exact match (after normalizing)
         let monthIndex = -1;
         
         for (let i = 0; i < months.length; i++) {
-            if (monthPart.includes(months[i].toLowerCase().replace('.', ''))) {
+            const normalizedMonth = months[i].toLowerCase().replace('.', '').trim();
+            if (monthPart === normalizedMonth) {
                 monthIndex = i;
                 break;
             }
