@@ -46,6 +46,13 @@ class Experience extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['start_date', 'end_date', 'is_current'];
+
+    /**
      * Get the skills associated with this experience.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
