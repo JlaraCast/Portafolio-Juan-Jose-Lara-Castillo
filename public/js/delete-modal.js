@@ -11,9 +11,7 @@ class DeleteModal {
         }
         
         this.modal = null;
-        this.currentForm = null;
         this.initialized = false;
-        this.defaultMessage = '';
         
         DeleteModal.instance = this;
         this.init();
@@ -37,6 +35,7 @@ class DeleteModal {
         this.closeBtn = document.getElementById('closeModal');
 
         this.attachEventListeners();
+        this.initialized = true;
     }
 
     attachEventListeners() {
@@ -44,7 +43,7 @@ class DeleteModal {
         // We attach to document to catch clicks on any delete button, even dynamically added ones
         document.addEventListener('click', (e) => {
             // Check if the clicked element or its parent is a delete button
-            const deleteBtn = e.target.closest('.delete-record');
+            const deleteBtn = e.target.closest('[data-confirm-delete]');
             
             if (deleteBtn) {
                 e.preventDefault();
@@ -53,7 +52,7 @@ class DeleteModal {
                 const id = deleteBtn.dataset.id;
                 const url = deleteBtn.dataset.url;
                 const title = deleteBtn.dataset.title;
-                const message = deleteBtn.dataset.message;
+                const message = deleteBtn.dataset.message || deleteBtn.dataset.confirmDelete;
                 
                 this.open(id, url, title, message);
             }
@@ -97,44 +96,6 @@ class DeleteModal {
         // Clear singleton instance
         DeleteModal.instance = null;
         this.initialized = false;
-    }
-
-    show(form, message = null) {
-        if (!this.modal) return;
-        
-        this.currentForm = form;
-        
-        // Update message if provided
-        if (message) {
-            const modalMessage = document.getElementById('modalMessage');
-            if (modalMessage) {
-                modalMessage.textContent = message;
-            }
-        }
-
-        // Show modal
-        this.modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-
-        // Focus on cancel button for accessibility
-        setTimeout(() => {
-            const cancelBtn = document.getElementById('cancelDelete');
-            if (cancelBtn) cancelBtn.focus();
-        }, 100);
-    }
-
-    hide() {
-        if (!this.modal) return;
-        
-        this.modal.classList.add('hidden');
-        this.currentForm = null;
-        document.body.style.overflow = '';
-        
-        // Reset message to default
-        const modalMessage = document.getElementById('modalMessage');
-        if (modalMessage && this.defaultMessage) {
-            modalMessage.textContent = this.defaultMessage;
-        }
     }
 
     open(id, url, title, message) {

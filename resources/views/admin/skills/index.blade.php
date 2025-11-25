@@ -40,11 +40,11 @@
 
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <a href="{{ route('admin.skills.edit', $skill) }}" class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-300 mr-4 font-semibold">{{ __('Edit') }}</a>
-                    <form action="{{ route('admin.skills.destroy', $skill) }}" method="POST" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" data-confirm-delete="{{ __('Are you sure you want to delete this skill? This action cannot be undone.') }}" class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 font-semibold">{{ __('Delete') }}</button>
-                    </form>
+                    <button type="button" 
+                        data-confirm-delete="{{ __('Are you sure you want to delete this skill? This action cannot be undone.') }}"
+                        data-url="{{ route('admin.skills.destroy', $skill) }}"
+                        data-title="{{ __('Delete Skill') }}"
+                        class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 font-semibold">{{ __('Delete') }}</button>
                 </td>
             </tr>
             @endforeach
