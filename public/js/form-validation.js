@@ -32,7 +32,8 @@ function addCharacterCounter(input) {
     const updateCounter = () => {
         const current = input.value.length;
         const remaining = maxLength - current;
-        counter.textContent = `${current} / ${maxLength} caracteres`;
+        const t = window.translations || {};
+        counter.textContent = `${current} / ${maxLength} ${t.characters || 'caracteres'}`;
 
         if (remaining < 20) {
             counter.classList.remove('text-gray-500', 'dark:text-gray-400');
