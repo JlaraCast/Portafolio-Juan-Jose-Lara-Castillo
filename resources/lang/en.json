@@ -130,5 +130,8 @@
     "contact.title": "Contact Me",
     "contact.phone": "Phone",
     "contact.profile": "View profile",
-    "contact.close": "Close"
+    "contact.close": "Close",
+    "Delete Project": "Delete Project",
+    "Delete Skill": "Delete Skill",
+    "Delete Experience": "Delete Experience"
 }

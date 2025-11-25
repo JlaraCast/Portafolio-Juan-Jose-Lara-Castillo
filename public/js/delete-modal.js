@@ -39,9 +39,8 @@ class DeleteModal {
     }
 
     attachEventListeners() {
-        // Use event delegation for delete buttons
-        // We attach to document to catch clicks on any delete button, even dynamically added ones
-        document.addEventListener('click', (e) => {
+        // Define handlers as bound methods so they can be removed later
+        this.handleClick = (e) => {
             // Check if the clicked element or its parent is a delete button
             const deleteBtn = e.target.closest('[data-confirm-delete]');
             
@@ -49,14 +48,23 @@ class DeleteModal {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                const id = deleteBtn.dataset.id;
                 const url = deleteBtn.dataset.url;
                 const title = deleteBtn.dataset.title;
                 const message = deleteBtn.dataset.message || deleteBtn.dataset.confirmDelete;
                 
-                this.open(id, url, title, message);
+                this.open(url, title, message);
             }
-        }, true); // Use capture phase to ensure we catch the event before other handlers
+        };
+
+        this.handleEscape = (e) => {
+            if (e.key === 'Escape' && this.modal && !this.modal.classList.contains('hidden')) {
+                this.close();
+            }
+        };
+
+        // Use event delegation for delete buttons
+        // We attach to document to catch clicks on any delete button, even dynamically added ones
+        document.addEventListener('click', this.handleClick, true); // Use capture phase to ensure we catch the event before other handlers
 
         // Close modal when clicking cancel or close buttons
         if (this.cancelBtn) {
@@ -77,11 +85,7 @@ class DeleteModal {
         }
 
         // Close on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.modal && !this.modal.classList.contains('hidden')) {
-                this.close();
-            }
-        });
+        document.addEventListener('keydown', this.handleEscape);
     }
 
     destroy() {
@@ -98,7 +102,7 @@ class DeleteModal {
         this.initialized = false;
     }
 
-    open(id, url, title, message) {
+    open(url, title, message) {
         if (!this.modal || !this.form) {
             return;
         }
