@@ -135,5 +135,7 @@
     "contact.close": "Cerrar",
     "Delete Project": "Eliminar Proyecto",
     "Delete Skill": "Eliminar Habilidad",
-    "Delete Experience": "Eliminar Experiencia"
+    "Delete Experience": "Eliminar Experiencia",
+    "Choose File": "Seleccionar Archivo",
+    "No file chosen": "Ningún archivo seleccionado"
 }

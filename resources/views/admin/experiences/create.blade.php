@@ -123,7 +123,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="logo" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Logo Upload') }}</label>
-                    <input type="file" name="logo" id="logo" lang="{{ app()->getLocale() }}" class="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 dark:file:bg-purple-900/30 dark:file:text-purple-300 transition-colors">
+                    <div class="mt-1 flex items-center">
+                        <label for="logo" class="cursor-pointer bg-white dark:bg-gray-700 py-2.5 px-4 border border-gray-300 dark:border-gray-600 rounded-xl shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors">
+                            {{ __('Choose File') }}
+                        </label>
+                        <span id="logo_filename" class="ml-3 text-sm text-gray-500 dark:text-gray-400">{{ __('No file chosen') }}</span>
+                        <input type="file" name="logo" id="logo" class="sr-only" onchange="document.getElementById('logo_filename').textContent = this.files[0] ? this.files[0].name : '{{ __('No file chosen') }}'">
+                    </div>
                     <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Upload an image (JPG, PNG, max 2MB)') }}</p>
                     
                     <label for="logo_url_input" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mt-4 mb-2">{{ __('Or Logo URL') }}</label>

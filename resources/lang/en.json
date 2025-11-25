@@ -134,5 +134,7 @@
     "contact.close": "Close",
     "Delete Project": "Delete Project",
     "Delete Skill": "Delete Skill",
-    "Delete Experience": "Delete Experience"
+    "Delete Experience": "Delete Experience",
+    "Choose File": "Choose File",
+    "No file chosen": "No file chosen"
 }

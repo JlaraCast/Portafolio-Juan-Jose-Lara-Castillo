@@ -40,7 +40,13 @@
 
             <div>
                 <label for="image" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Image Upload') }}</label>
-                <input type="file" name="image" id="image" accept="image/*" lang="{{ app()->getLocale() }}" class="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 dark:file:bg-indigo-900/30 dark:file:text-indigo-300 transition-colors">
+                <div class="mt-1 flex items-center">
+                    <label for="image" class="cursor-pointer bg-white dark:bg-gray-700 py-2.5 px-4 border border-gray-300 dark:border-gray-600 rounded-xl shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                        {{ __('Choose File') }}
+                    </label>
+                    <span id="image_filename" class="ml-3 text-sm text-gray-500 dark:text-gray-400">{{ __('No file chosen') }}</span>
+                    <input type="file" name="image" id="image" accept="image/*" class="sr-only" onchange="document.getElementById('image_filename').textContent = this.files[0] ? this.files[0].name : '{{ __('No file chosen') }}'">
+                </div>
                 <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Upload an image (JPG, PNG, max 2MB)') }}</p>
             </div>
 
