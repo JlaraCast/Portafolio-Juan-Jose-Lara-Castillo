@@ -79,37 +79,58 @@ class DeleteModal {
     }
 
     attachEventListeners() {
-        // Use named function for click handler so we can remove it if needed
+        // Use delegation on document for better reliability
         this.handleClick = (e) => {
+            // Check if the clicked element or its parent has the data attribute
             const deleteBtn = e.target.closest('[data-confirm-delete]');
+            
             if (deleteBtn) {
+                console.log('DeleteModal: Delete button clicked', deleteBtn);
                 e.preventDefault();
                 e.stopPropagation();
+                
                 const form = deleteBtn.closest('form');
+                console.log('DeleteModal: Found form', form);
+                
+                if (!form) {
+                    console.error('DeleteModal: No form found for delete button');
+                    return;
+                }
+                
                 const message = deleteBtn.getAttribute('data-confirm-delete');
+                console.log('DeleteModal: Message', message);
                 this.show(form, message);
             }
         };
         
-        // Attach click handler
-        document.addEventListener('click', this.handleClick);
+        // Attach click handler to document for better event delegation
+        document.addEventListener('click', this.handleClick, true); // Use capture phase
+        console.log('DeleteModal: Click handler attached to document');
 
         // Cancel button
         const cancelBtn = document.getElementById('cancelDelete');
         if (cancelBtn) {
-            cancelBtn.addEventListener('click', () => this.hide());
+            cancelBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.hide();
+            });
         }
 
         // Backdrop click
         const backdrop = document.getElementById('modalBackdrop');
         if (backdrop) {
-            backdrop.addEventListener('click', () => this.hide());
+            backdrop.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.hide();
+            });
         }
 
         // Confirm button
         const confirmBtn = document.getElementById('confirmDelete');
         if (confirmBtn) {
-            confirmBtn.addEventListener('click', () => {
+            confirmBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('DeleteModal: Confirm clicked, submitting form', this.currentForm);
                 if (this.currentForm) {
                     this.currentForm.submit();
                 }
@@ -129,7 +150,7 @@ class DeleteModal {
     destroy() {
         // Cleanup event listeners
         if (this.handleClick) {
-            document.removeEventListener('click', this.handleClick);
+            document.removeEventListener('click', this.handleClick, true); // Match the capture phase
         }
         if (this.handleEscape) {
             document.removeEventListener('keydown', this.handleEscape);
@@ -191,8 +212,12 @@ DeleteModal.instance = null;
 // Initialize on DOM ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
+        console.log('DeleteModal: Initializing on DOMContentLoaded');
         window.deleteModal = new DeleteModal();
+        console.log('DeleteModal: Initialized successfully');
     });
 } else {
+    console.log('DeleteModal: Initializing immediately (DOM already loaded)');
     window.deleteModal = new DeleteModal();
+    console.log('DeleteModal: Initialized successfully');
 }
