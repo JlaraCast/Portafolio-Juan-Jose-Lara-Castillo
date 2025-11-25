@@ -71,7 +71,7 @@ class ProjectController extends Controller
             $project->skills()->attach($validated['skills']);
         }
 
-        return redirect()->route('admin.projects.index')->with('success', 'Project created successfully.');
+        return redirect()->route('admin.projects.index')->with('success', __('Project created successfully.'));
     }
 
     /**
@@ -136,7 +136,7 @@ class ProjectController extends Controller
             $project->skills()->detach();
         }
 
-        return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
+        return redirect()->route('admin.projects.index')->with('success', __('Project updated successfully.'));
     }
 
     /**
@@ -153,6 +153,6 @@ class ProjectController extends Controller
         }
 
         $project->delete();
-        return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
+        return redirect()->route('admin.projects.index')->with('success', __('Project deleted successfully.'));
     }
 }
