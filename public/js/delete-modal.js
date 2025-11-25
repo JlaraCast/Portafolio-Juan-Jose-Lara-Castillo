@@ -5,12 +5,23 @@
 
 class DeleteModal {
     constructor() {
+        // Prevent multiple instances (singleton pattern)
+        if (DeleteModal.instance) {
+            return DeleteModal.instance;
+        }
+        
         this.modal = null;
         this.currentForm = null;
+        this.initialized = false;
+        
+        DeleteModal.instance = this;
         this.init();
     }
 
     init() {
+        // Prevent multiple initializations
+        if (this.initialized) return;
+        
         // Create modal element if it doesn't exist
         if (!document.getElementById('deleteModal')) {
             this.createModal();
@@ -18,6 +29,7 @@ class DeleteModal {
         this.modal = document.getElementById('deleteModal');
         if (this.modal) {
             this.attachEventListeners();
+            this.initialized = true;
         }
     }
 
@@ -67,8 +79,8 @@ class DeleteModal {
     }
 
     attachEventListeners() {
-        // Handle all delete buttons with data-confirm-delete attribute
-        document.addEventListener('click', (e) => {
+        // Use named function for click handler so we can remove it if needed
+        this.handleClick = (e) => {
             const deleteBtn = e.target.closest('[data-confirm-delete]');
             if (deleteBtn) {
                 e.preventDefault();
@@ -77,32 +89,60 @@ class DeleteModal {
                 const message = deleteBtn.getAttribute('data-confirm-delete');
                 this.show(form, message);
             }
-        });
+        };
+        
+        // Attach click handler
+        document.addEventListener('click', this.handleClick);
 
         // Cancel button
-        document.getElementById('cancelDelete')?.addEventListener('click', () => {
-            this.hide();
-        });
+        const cancelBtn = document.getElementById('cancelDelete');
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', () => this.hide());
+        }
 
         // Backdrop click
-        document.getElementById('modalBackdrop')?.addEventListener('click', () => {
-            this.hide();
-        });
+        const backdrop = document.getElementById('modalBackdrop');
+        if (backdrop) {
+            backdrop.addEventListener('click', () => this.hide());
+        }
 
         // Confirm button
-        document.getElementById('confirmDelete')?.addEventListener('click', () => {
-            if (this.currentForm) {
-                this.currentForm.submit();
-            }
-            this.hide();
-        });
+        const confirmBtn = document.getElementById('confirmDelete');
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', () => {
+                if (this.currentForm) {
+                    this.currentForm.submit();
+                }
+                this.hide();
+            });
+        }
 
         // ESC key to close
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !this.modal.classList.contains('hidden')) {
+        this.handleEscape = (e) => {
+            if (e.key === 'Escape' && this.modal && !this.modal.classList.contains('hidden')) {
                 this.hide();
             }
-        });
+        };
+        document.addEventListener('keydown', this.handleEscape);
+    }
+
+    destroy() {
+        // Cleanup event listeners
+        if (this.handleClick) {
+            document.removeEventListener('click', this.handleClick);
+        }
+        if (this.handleEscape) {
+            document.removeEventListener('keydown', this.handleEscape);
+        }
+        
+        // Remove modal from DOM
+        if (this.modal && this.modal.parentNode) {
+            this.modal.parentNode.removeChild(this.modal);
+        }
+        
+        // Clear singleton instance
+        DeleteModal.instance = null;
+        this.initialized = false;
     }
 
     show(form, message = null) {
@@ -130,6 +170,8 @@ class DeleteModal {
     }
 
     hide() {
+        if (!this.modal) return;
+        
         this.modal.classList.add('hidden');
         this.currentForm = null;
         document.body.style.overflow = '';
@@ -143,7 +185,8 @@ class DeleteModal {
     }
 }
 
-// Ensure the script only initializes after DOM and translations are ready
+// Initialize singleton instance
+DeleteModal.instance = null;
 
 // Initialize on DOM ready
 if (document.readyState === 'loading') {

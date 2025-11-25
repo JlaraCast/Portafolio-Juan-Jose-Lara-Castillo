@@ -25,16 +25,16 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="start_date" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Start Date') }}</label>
-                        <input type="month" id="start_date" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" required>
+                        <input type="month" name="start_date" id="start_date" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" required>
                     </div>
                     <div id="end_date_container">
                         <label for="end_date" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('End Date') }}</label>
-                        <input type="month" id="end_date" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors">
+                        <input type="month" name="end_date" id="end_date" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors">
                     </div>
                 </div>
                 <div class="mt-4">
                     <label class="flex items-center cursor-pointer">
-                        <input type="checkbox" id="is_current" class="rounded border-gray-300 dark:border-gray-600 text-purple-600 focus:ring-purple-500 dark:bg-gray-700">
+                        <input type="checkbox" name="is_current" id="is_current" value="1" class="rounded border-gray-300 dark:border-gray-600 text-purple-600 focus:ring-purple-500 dark:bg-gray-700">
                         <span class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('I currently work/study here') }}</span>
                     </label>
                 </div>
