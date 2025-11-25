@@ -8,12 +8,6 @@
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{ __('Edit Profile') }}</h2>
     </div>
 
-    @if(session('success'))
-        <div class="mb-6 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200 px-4 py-3 rounded-xl">
-            {{ session('success') }}
-        </div>
-    @endif
-
     <div class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 border border-gray-100 dark:border-gray-700">
         <form action="{{ route('admin.profile.update') }}" method="POST" class="space-y-6 loading-form">
             @csrf

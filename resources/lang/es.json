@@ -99,5 +99,6 @@
     "reset.new_password": "Nueva Contraseña",
     "reset.confirm_password": "Confirmar Contraseña",
     "reset.submit": "Restablecer Contraseña",
-    "reset.back_to_login": "Volver al Login"
+    "reset.back_to_login": "Volver al Login",
+    "Profile updated successfully.": "Perfil actualizado exitosamente."
 }

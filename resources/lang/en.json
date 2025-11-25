@@ -99,5 +99,6 @@
     "reset.new_password": "New Password",
     "reset.confirm_password": "Confirm Password",
     "reset.submit": "Reset Password",
-    "reset.back_to_login": "Back to Login"
+    "reset.back_to_login": "Back to Login",
+    "Profile updated successfully.": "Profile updated successfully."
 }
