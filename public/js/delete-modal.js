@@ -32,6 +32,7 @@ class DeleteModal {
         this.modalTitle = document.getElementById('modalTitle');
         this.modalMessage = document.getElementById('modalMessage');
         this.cancelBtn = document.getElementById('cancelDelete');
+        this.closeBtn = document.getElementById('closeModal');
 
         this.attachEventListeners();
         this.initialized = true;
@@ -68,6 +69,10 @@ class DeleteModal {
         // Close modal when clicking cancel or close buttons
         if (this.cancelBtn) {
             this.cancelBtn.addEventListener('click', () => this.close());
+        }
+
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', () => this.close());
         }
 
         // Close modal when clicking outside
