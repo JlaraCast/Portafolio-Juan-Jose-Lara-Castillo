@@ -78,7 +78,7 @@ class DeleteModal {
         // Close modal when clicking outside
         if (this.modal) {
             this.modal.addEventListener('click', (e) => {
-                if (e.target === this.modal) {
+                if (e.target === this.modal || e.target.hasAttribute('data-modal-overlay')) {
                     this.close();
                 }
             });
