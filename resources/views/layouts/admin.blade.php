@@ -125,7 +125,11 @@
             passwordsMatch: "{{ __('Passwords match') }}",
             passwordsDontMatch: "{{ __('Passwords do not match') }}",
             characters: "{{ __('characters') }}",
-            loading: "{{ __('Processing...') }}"
+            loading: "{{ __('Processing...') }}",
+            confirmDelete: "{{ __('Confirm Delete') }}",
+            confirmDeleteMessage: "{{ __('Are you sure you want to delete this item? This action cannot be undone.') }}",
+            delete: "{{ __('Delete') }}",
+            cancel: "{{ __('Cancel') }}"
         };
     </script>
     
@@ -133,5 +137,7 @@
     <script src="{{ asset('js/form-validation.js') }}"></script>
     <!-- Form Loading State Script -->
     <script src="{{ asset('js/form-loading.js') }}"></script>
+    <!-- Delete Modal Script -->
+    <script src="{{ asset('js/delete-modal.js') }}"></script>
 </body>
 </html>

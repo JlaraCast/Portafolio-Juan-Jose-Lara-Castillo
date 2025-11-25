@@ -115,5 +115,10 @@
     "Experience deleted successfully.": "Experiencia eliminada exitosamente.",
     "Skill created successfully.": "Habilidad creada exitosamente.",
     "Skill updated successfully.": "Habilidad actualizada exitosamente.",
-    "Skill deleted successfully.": "Habilidad eliminada exitosamente."
+    "Skill deleted successfully.": "Habilidad eliminada exitosamente.",
+    "Confirm Delete": "Confirmar Eliminación",
+    "Are you sure you want to delete this item? This action cannot be undone.": "¿Estás seguro de que quieres eliminar este elemento? Esta acción no se puede deshacer.",
+    "Are you sure you want to delete this project? This action cannot be undone.": "¿Estás seguro de que quieres eliminar este proyecto? Esta acción no se puede deshacer.",
+    "Are you sure you want to delete this skill? This action cannot be undone.": "¿Estás seguro de que quieres eliminar esta habilidad? Esta acción no se puede deshacer.",
+    "Are you sure you want to delete this experience? This action cannot be undone.": "¿Estás seguro de que quieres eliminar esta experiencia? Esta acción no se puede deshacer."
 }

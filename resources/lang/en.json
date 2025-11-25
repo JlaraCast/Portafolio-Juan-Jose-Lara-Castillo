@@ -115,5 +115,10 @@
     "Experience deleted successfully.": "Experience deleted successfully.",
     "Skill created successfully.": "Skill created successfully.",
     "Skill updated successfully.": "Skill updated successfully.",
-    "Skill deleted successfully.": "Skill deleted successfully."
+    "Skill deleted successfully.": "Skill deleted successfully.",
+    "Confirm Delete": "Confirm Delete",
+    "Are you sure you want to delete this item? This action cannot be undone.": "Are you sure you want to delete this item? This action cannot be undone.",
+    "Are you sure you want to delete this project? This action cannot be undone.": "Are you sure you want to delete this project? This action cannot be undone.",
+    "Are you sure you want to delete this skill? This action cannot be undone.": "Are you sure you want to delete this skill? This action cannot be undone.",
+    "Are you sure you want to delete this experience? This action cannot be undone.": "Are you sure you want to delete this experience? This action cannot be undone."
 }
