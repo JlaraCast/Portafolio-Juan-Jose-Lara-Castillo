@@ -123,7 +123,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="logo" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Logo Upload') }}</label>
-                    <input type="file" name="logo" id="logo" class="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 dark:file:bg-purple-900/30 dark:file:text-purple-300 transition-colors">
+                    <input type="file" name="logo" id="logo" lang="{{ app()->getLocale() }}" class="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 dark:file:bg-purple-900/30 dark:file:text-purple-300 transition-colors">
                     <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Upload an image (JPG, PNG, max 2MB)') }}</p>
                     
                     <label for="logo_url_input" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mt-4 mb-2">{{ __('Or Logo URL') }}</label>

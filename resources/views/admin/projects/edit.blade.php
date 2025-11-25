@@ -19,22 +19,22 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="title_es" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Title') }} (ES)</label>
+                    <label for="title_es" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Title (ES)') }}</label>
                     <input type="text" name="title_es" id="title_es" value="{{ $project->title['es'] ?? '' }}" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" required>
                 </div>
                 <div>
-                    <label for="title_en" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Title') }} (EN)</label>
+                    <label for="title_en" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Title (EN)') }}</label>
                     <input type="text" name="title_en" id="title_en" value="{{ $project->title['en'] ?? '' }}" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" required>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="description_es" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Description') }} (ES)</label>
+                    <label for="description_es" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Description (ES)') }}</label>
                     <textarea name="description_es" id="description_es" rows="4" maxlength="1000" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" required>{{ $project->description['es'] ?? '' }}</textarea>
                 </div>
                 <div>
-                    <label for="description_en" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Description') }} (EN)</label>
+                    <label for="description_en" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Description (EN)') }}</label>
                     <textarea name="description_en" id="description_en" rows="4" maxlength="1000" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" required>{{ $project->description['en'] ?? '' }}</textarea>
                 </div>
             </div>
@@ -46,14 +46,14 @@
                         <img src="{{ $project->image_url }}" alt="Current image for {{ $project->title['es'] ?? $project->title['en'] ?? 'project' }}" class="h-32 w-auto rounded-lg object-cover border border-gray-300 dark:border-gray-600">
                     </div>
                 @endif
-                <input type="file" name="image" id="image" accept="image/*" class="block w-full text-sm text-gray-900 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 transition-colors">
-                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ __('Upload an image (JPG, PNG, max 2MB)') }}</p>
+                <input type="file" name="image" id="image" accept="image/*" lang="{{ app()->getLocale() }}" class="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 dark:file:bg-indigo-900/30 dark:file:text-indigo-300 transition-colors">
+                <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Upload an image (JPG, PNG, max 2MB)') }}</p>
             </div>
 
             <div>
                 <label for="image_url_input" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Or Image URL') }}</label>
                 <input type="url" name="image_url_input" id="image_url_input" value="{{ filter_var($project->image_url, FILTER_VALIDATE_URL) ? $project->image_url : '' }}" placeholder="https://example.com/image.jpg" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors">
-                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ __('Enter a direct URL to an image hosted elsewhere (e.g., Imgur, GitHub, AWS S3).') }}</p>
+                <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Enter a direct URL to an image hosted elsewhere (e.g., Imgur, GitHub, AWS S3).') }}</p>
             </div>
 
             <div>
