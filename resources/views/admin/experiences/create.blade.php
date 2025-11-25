@@ -16,11 +16,35 @@
         <form action="{{ route('admin.experiences.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8 loading-form">
             @csrf
             
+            <!-- Period Selector -->
+            <div class="border-b border-gray-100 dark:border-gray-700 pb-6">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                    <svg class="w-6 h-6 mr-3 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    {{ __('Period') }}
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="start_date" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Start Date') }}</label>
+                        <input type="month" name="start_date" id="start_date" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" required>
+                    </div>
+                    <div id="end_date_container">
+                        <label for="end_date" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('End Date') }}</label>
+                        <input type="month" name="end_date" id="end_date" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors">
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" name="is_current" id="is_current" value="1" class="rounded border-gray-300 dark:border-gray-600 text-purple-600 focus:ring-purple-500 dark:bg-gray-700">
+                        <span class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('I currently work/study here') }}</span>
+                    </label>
+                </div>
+            </div>
+
             <!-- Spanish Fields -->
             <div class="border-b border-gray-100 dark:border-gray-700 pb-6">
                 <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
                     <span class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center mr-3 text-xs font-bold">ES</span>
-                    Español
+                    {{ __('Spanish') }}
                 </h3>
                 <div class="grid grid-cols-1 gap-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -35,8 +59,8 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="period_es" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Period (ES)') }}</label>
-                            <input type="text" name="period[es]" id="period_es" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" required>
+                            <label for="period_es" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Period (ES)') }} <span class="text-xs text-gray-500 dark:text-gray-400">({{ __('Auto-generated') }})</span></label>
+                            <input type="text" name="period[es]" id="period_es" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors bg-gray-50 dark:bg-gray-900" readonly>
                         </div>
                         <div>
                             <label for="location_es" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Location (ES)') }}</label>
@@ -54,7 +78,7 @@
             <div class="border-b border-gray-100 dark:border-gray-700 pb-6">
                 <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
                     <span class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mr-3 text-xs font-bold">EN</span>
-                    English
+                    {{ __('English') }}
                 </h3>
                 <div class="grid grid-cols-1 gap-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -69,8 +93,8 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="period_en" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Period (EN)') }}</label>
-                            <input type="text" name="period[en]" id="period_en" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" required>
+                            <label for="period_en" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Period (EN)') }} <span class="text-xs text-gray-500 dark:text-gray-400">({{ __('Auto-generated') }})</span></label>
+                            <input type="text" name="period[en]" id="period_en" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors bg-gray-50 dark:bg-gray-900" readonly>
                         </div>
                         <div>
                             <label for="location_en" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Location (EN)') }}</label>
@@ -99,8 +123,14 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="logo" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Logo Upload') }}</label>
-                    <input type="file" name="logo" id="logo" class="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 dark:file:bg-purple-900/30 dark:file:text-purple-300 transition-colors">
-                    <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Upload an image (JPG, PNG, max 2MB). Note: On Vercel, file uploads are read-only. Use the URL field below for production.') }}</p>
+                    <div class="mt-1 flex items-center">
+                        <label for="logo" class="cursor-pointer bg-white dark:bg-gray-700 py-2.5 px-4 border border-gray-300 dark:border-gray-600 rounded-xl shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors">
+                            {{ __('Choose File') }}
+                        </label>
+                        <span id="logo_filename" class="ml-3 text-sm text-gray-500 dark:text-gray-400">{{ __('No file chosen') }}</span>
+                        <input type="file" name="logo" id="logo" class="sr-only" onchange="document.getElementById('logo_filename').textContent = this.files[0] ? this.files[0].name : '{{ __('No file chosen') }}'">
+                    </div>
+                    <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Upload an image (JPG, PNG, max 2MB)') }}</p>
                     
                     <label for="logo_url_input" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mt-4 mb-2">{{ __('Or Logo URL') }}</label>
                     <input type="url" name="logo_url_input" id="logo_url_input" placeholder="https://example.com/logo.png" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors">
@@ -122,4 +152,6 @@
         </form>
     </div>
 </div>
+
+<script src="{{ asset('js/period-formatter.js') }}"></script>
 @endsection

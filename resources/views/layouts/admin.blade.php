@@ -113,7 +113,60 @@
         </div>
     </div>
     
-    
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 z-[9999] hidden" aria-labelledby="modalTitle" role="dialog" aria-modal="true">
+        <!-- Background overlay -->
+        <div class="fixed inset-0 bg-gray-500 dark:bg-gray-900 bg-opacity-75 dark:bg-opacity-80 transition-opacity backdrop-blur-sm" aria-hidden="true" data-modal-overlay="true"></div>
+
+        <!-- Modal Container -->
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0" data-modal-overlay="true">
+                <!-- Modal panel -->
+                <div class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-gray-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg border border-gray-100 dark:border-gray-700">
+                    <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="absolute top-0 right-0 pt-4 pr-4">
+                            <button type="button" id="closeModal" aria-label="Close" class="bg-white dark:bg-gray-800 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <span class="sr-only">Close</span>
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="sm:flex sm:items-start">
+                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-xl bg-red-100 dark:bg-red-900/30 sm:mx-0 sm:h-10 sm:w-10">
+                                <svg class="h-6 w-6 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                <h3 class="text-lg leading-6 font-bold text-gray-900 dark:text-white" id="modalTitle">
+                                    {{ __('Confirm Delete') }}
+                                </h3>
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500 dark:text-gray-400" id="modalMessage">
+                                        {{ __('Are you sure you want to delete this item? This action cannot be undone.') }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700/50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-3">
+                        <form id="deleteForm" method="POST" class="w-full sm:w-auto">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" id="confirmDelete" class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-lg shadow-red-500/30 px-4 py-2.5 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto sm:text-sm transition-all hover:scale-105">
+                                {{ __('Delete') }}
+                            </button>
+                        </form>
+                        <button type="button" id="cancelDelete" class="mt-3 w-full inline-flex justify-center rounded-xl border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2.5 bg-white dark:bg-gray-700 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:w-auto sm:text-sm transition-colors">
+                            {{ __('Cancel') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Translation variables for JavaScript -->
     <script>
         window.translations = {
@@ -125,7 +178,9 @@
             passwordsMatch: "{{ __('Passwords match') }}",
             passwordsDontMatch: "{{ __('Passwords do not match') }}",
             characters: "{{ __('characters') }}",
-            loading: "{{ __('Processing...') }}"
+            loading: "{{ __('Processing...') }}",
+            present: "Presente",
+            present_en: "Present"
         };
     </script>
     
@@ -133,5 +188,7 @@
     <script src="{{ asset('js/form-validation.js') }}"></script>
     <!-- Form Loading State Script -->
     <script src="{{ asset('js/form-loading.js') }}"></script>
+    <!-- Delete Modal Script -->
+    <script src="{{ asset('js/delete-modal.js') }}"></script>
 </body>
 </html>

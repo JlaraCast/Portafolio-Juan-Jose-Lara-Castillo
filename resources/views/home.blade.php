@@ -93,7 +93,7 @@
 
     <!-- Projects Section (Coding Projects) -->
     <section id="projects" class="py-12">
-        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center">Proyectos</h2>
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center" data-translate="projects.heading">{{ __('projects.heading') }}</h2>
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             @foreach($projects as $project)
                 <div class="project-card bg-white dark:bg-purple-900/50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-purple-700 flex flex-col h-full"
@@ -164,7 +164,7 @@
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                                     </div>
                                     <div class="ml-4">
-                                        <p class="text-sm font-medium text-gray-900 dark:text-white">Teléfono</p>
+                                        <p class="text-sm font-medium text-gray-900 dark:text-white" data-translate="contact.phone">{{ __('contact.phone') }}</p>
                                         <p class="text-sm text-gray-500 dark:text-gray-400">+506 8925 9108</p>
                                     </div>
                                 </a>
@@ -175,7 +175,7 @@
                                     </div>
                                     <div class="ml-4">
                                         <p class="text-sm font-medium text-gray-900 dark:text-white">LinkedIn</p>
-                                        <p class="text-sm text-gray-500 dark:text-gray-400">Ver perfil</p>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400" data-translate="contact.profile">{{ __('contact.profile') }}</p>
                                     </div>
                                 </a>
                             </div>
@@ -184,7 +184,7 @@
                 </div>
                 <div class="bg-gray-50 dark:bg-gray-700/50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-emerald-600 dark:bg-indigo-600 text-base font-medium text-white hover:bg-emerald-700 dark:hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 sm:ml-3 sm:w-auto sm:text-sm" onclick="closeContactModal()">
-                        Cerrar
+                        <span data-translate="contact.close">{{ __('contact.close') }}</span>
                     </button>
                 </div>
             </div>

@@ -52,11 +52,11 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <a href="{{ route('admin.experiences.edit', $experience) }}" class="text-purple-600 dark:text-purple-400 hover:text-purple-900 dark:hover:text-purple-300 mr-4 font-semibold">{{ __('Edit') }}</a>
-                    <form action="{{ route('admin.experiences.destroy', $experience) }}" method="POST" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 font-semibold" onclick="return confirm('{{ __('Are you sure?') }}')">{{ __('Delete') }}</button>
-                    </form>
+                    <button type="button" 
+                        data-confirm-delete="{{ __('Are you sure you want to delete this experience? This action cannot be undone.') }}"
+                        data-url="{{ route('admin.experiences.destroy', $experience) }}"
+                        data-title="{{ __('Delete Experience') }}"
+                        class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 font-semibold">{{ __('Delete') }}</button>
                 </td>
             </tr>
             @endforeach
