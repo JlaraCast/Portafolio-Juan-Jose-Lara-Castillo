@@ -19,6 +19,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Share the portfolio owner with the app layout
+        \Illuminate\Support\Facades\View::composer('layouts.app', function ($view) {
+            if (!array_key_exists('user', $view->getData())) {
+                $view->with('user', \App\Models\User::first());
+            }
+        });
+
         // Force HTTPS in production
         if (config('app.env') === 'production') {
             \URL::forceScheme('https');

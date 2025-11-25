@@ -15,6 +15,9 @@ return new class extends Migration
             $table->json('subtitle')->nullable();
             $table->json('description')->nullable();
             $table->string('hero_image')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('github')->nullable();
         });
     }
 
@@ -24,7 +27,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['subtitle', 'description', 'hero_image']);
+            $table->dropColumn(['subtitle', 'description', 'hero_image', 'phone', 'linkedin', 'github']);
         });
     }
 };

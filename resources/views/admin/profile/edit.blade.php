@@ -36,6 +36,37 @@
                 </div>
             </div>
 
+            <!-- Contact & Social -->
+            <div class="border-b border-gray-100 dark:border-gray-700 pb-6">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">{{ __('Contact & Social') }}</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label for="phone" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Phone') }}</label>
+                        <input type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}" maxlength="20" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors">
+                        @error('phone')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="linkedin" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('LinkedIn') }}</label>
+                        <input type="url" name="linkedin" id="linkedin" value="{{ old('linkedin', $user->linkedin) }}" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" placeholder="https://linkedin.com/in/...">
+                        @error('linkedin')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="github" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('GitHub') }}</label>
+                        <input type="url" name="github" id="github" value="{{ old('github', $user->github) }}" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" placeholder="https://github.com/...">
+                        @error('github')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
             <!-- Change Password -->
             <div class="border-b border-gray-100 dark:border-gray-700 pb-6">
                 <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">{{ __('Change Password') }}</h3>

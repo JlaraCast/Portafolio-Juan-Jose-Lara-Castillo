@@ -41,6 +41,9 @@ class User extends Authenticatable
         'subtitle',
         'description',
         'hero_image',
+        'phone',
+        'linkedin',
+        'github',
     ];
 
     /**
