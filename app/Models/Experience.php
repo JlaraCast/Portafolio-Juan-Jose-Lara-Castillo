@@ -54,4 +54,76 @@ class Experience extends Model
     {
         return $this->belongsToMany(Skill::class);
     }
+
+    /**
+     * Get the start date from the period.
+     *
+     * @return string|null
+     */
+    public function getStartDateAttribute(): ?string
+    {
+        if (empty($this->period['en'])) {
+            return null;
+        }
+
+        $parts = explode('-', $this->period['en']);
+        $start = trim($parts[0]);
+
+        try {
+            return \Carbon\Carbon::createFromFormat('F Y', $start)->format('Y-m');
+        } catch (\Exception $e) {
+            try {
+                return \Carbon\Carbon::createFromFormat('M Y', $start)->format('Y-m');
+            } catch (\Exception $e) {
+                return null;
+            }
+        }
+    }
+
+    /**
+     * Get the end date from the period.
+     *
+     * @return string|null
+     */
+    public function getEndDateAttribute(): ?string
+    {
+        if (empty($this->period['en'])) {
+            return null;
+        }
+
+        $parts = explode('-', $this->period['en']);
+        
+        if (count($parts) < 2) {
+            return null;
+        }
+
+        $end = trim($parts[1]);
+
+        if (stripos($end, 'Present') !== false || stripos($end, 'Current') !== false) {
+            return null;
+        }
+
+        try {
+            return \Carbon\Carbon::createFromFormat('F Y', $end)->format('Y-m');
+        } catch (\Exception $e) {
+            try {
+                return \Carbon\Carbon::createFromFormat('M Y', $end)->format('Y-m');
+            } catch (\Exception $e) {
+                return null;
+            }
+        }
+    }
+
+    /**
+     * Check if the experience is current.
+     *
+     * @return bool
+     */
+    public function getIsCurrentAttribute(): bool
+    {
+        if (empty($this->period['en'])) {
+            return false;
+        }
+        return stripos($this->period['en'], 'Present') !== false || stripos($this->period['en'], 'Current') !== false;
+    }
 }
