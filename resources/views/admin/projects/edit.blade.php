@@ -70,11 +70,11 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="github_url" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Github Link') }} (Optional)</label>
+                    <label for="github_url" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Github Link') }} ({{ __('Optional') }})</label>
                     <input type="url" name="github_url" id="github_url" value="{{ $project->github_url }}" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors">
                 </div>
                 <div>
-                    <label for="live_url" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Project Link') }} (Optional)</label>
+                    <label for="live_url" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Project Link') }} ({{ __('Optional') }})</label>
                     <input type="url" name="live_url" id="live_url" value="{{ $project->live_url }}" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors">
                 </div>
             </div>

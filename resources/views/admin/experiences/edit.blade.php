@@ -45,7 +45,7 @@
             <div class="border-b border-gray-100 dark:border-gray-700 pb-6">
                 <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
                     <span class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center mr-3 text-xs font-bold">ES</span>
-                    Español
+                    {{ __('Spanish') }}
                 </h3>
                 <div class="grid grid-cols-1 gap-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -79,7 +79,7 @@
             <div class="border-b border-gray-100 dark:border-gray-700 pb-6">
                 <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
                     <span class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mr-3 text-xs font-bold">EN</span>
-                    English
+                    {{ __('English') }}
                 </h3>
                 <div class="grid grid-cols-1 gap-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

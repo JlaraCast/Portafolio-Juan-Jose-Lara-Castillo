@@ -125,5 +125,18 @@
     "End Date": "End Date",
     "I currently work/study here": "I currently work/study here",
     "Auto-generated": "Auto-generated",
-    "Present": "Present"
+    "Present": "Present",
+    "Optional": "Optional",
+    "Spanish": "Spanish",
+    "English": "English",
+    "hero.title": "Hi, I'm",
+    "hero.contact": "Contact Me",
+    "hero.work": "View Experience",
+    "skills.title": "Technical Skills",
+    "projects.title": "Experience",
+    "projects.heading": "Projects",
+    "contact.title": "Contact Me",
+    "contact.phone": "Phone",
+    "contact.profile": "View profile",
+    "contact.close": "Close"
 }
