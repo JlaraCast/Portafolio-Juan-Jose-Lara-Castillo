@@ -43,7 +43,15 @@ class DeleteModal {
         // Use delegation on document for better reliability
         this.handleClick = (e) => {
             // Check if the clicked element or its parent has the data attribute
-            const deleteBtn = e.target.closest('[data-confirm-delete]');
+            // Check matches first for direct clicks, then closest for nested elements
+            // Also handle cases where e.target might not support matches/closest (e.g. text nodes)
+            let deleteBtn = null;
+            
+            if (e.target.matches && e.target.matches('[data-confirm-delete]')) {
+                deleteBtn = e.target;
+            } else if (e.target.closest) {
+                deleteBtn = e.target.closest('[data-confirm-delete]');
+            }
             
             if (deleteBtn) {
                 console.log('DeleteModal: Delete button clicked', deleteBtn);
