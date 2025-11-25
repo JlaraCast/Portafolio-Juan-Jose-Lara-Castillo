@@ -73,7 +73,7 @@ class ExperienceController extends Controller
             $experience->skills()->attach($validated['skills']);
         }
 
-        return redirect()->route('admin.experiences.index')->with('success', 'Experience created successfully.');
+        return redirect()->route('admin.experiences.index')->with('success', __('Experience created successfully.'));
     }
 
     /**
@@ -128,7 +128,7 @@ class ExperienceController extends Controller
             $experience->skills()->detach();
         }
 
-        return redirect()->route('admin.experiences.index')->with('success', 'Experience updated successfully.');
+        return redirect()->route('admin.experiences.index')->with('success', __('Experience updated successfully.'));
     }
 
     /**
@@ -145,6 +145,6 @@ class ExperienceController extends Controller
         }
 
         $experience->delete();
-        return redirect()->route('admin.experiences.index')->with('success', 'Experience deleted successfully.');
+        return redirect()->route('admin.experiences.index')->with('success', __('Experience deleted successfully.'));
     }
 }

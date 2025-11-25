@@ -100,5 +100,15 @@
     "reset.confirm_password": "Confirm Password",
     "reset.submit": "Reset Password",
     "reset.back_to_login": "Back to Login",
-    "Profile updated successfully.": "Profile updated successfully."
+    "Profile updated successfully.": "Profile updated successfully.",
+    "skills.filter_note": "Click on a skill to filter related projects and experiences.",
+    "Project created successfully.": "Project created successfully.",
+    "Project updated successfully.": "Project updated successfully.",
+    "Project deleted successfully.": "Project deleted successfully.",
+    "Experience created successfully.": "Experience created successfully.",
+    "Experience updated successfully.": "Experience updated successfully.",
+    "Experience deleted successfully.": "Experience deleted successfully.",
+    "Skill created successfully.": "Skill created successfully.",
+    "Skill updated successfully.": "Skill updated successfully.",
+    "Skill deleted successfully.": "Skill deleted successfully."
 }
