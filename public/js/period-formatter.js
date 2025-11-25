@@ -18,18 +18,21 @@ class PeriodFormatter {
     }
 
     init() {
+        if (this.initialized) return;
+
         // Wait for DOM to be ready
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.setupListeners());
+            document.addEventListener('DOMContentLoaded', () => {
+                this.attachEventListeners();
+                this.initialized = true;
+            });
         } else {
-            this.setupListeners();
+            this.attachEventListeners();
+            this.initialized = true;
         }
     }
 
-    setupListeners() {
-        // Prevent multiple initializations
-        if (this.initialized) return;
-        
+    attachEventListeners() {
         const startDateInput = document.getElementById('start_date');
         const endDateInput = document.getElementById('end_date');
         const currentCheckbox = document.getElementById('is_current');
@@ -56,9 +59,6 @@ class PeriodFormatter {
         // Initial state
         this.toggleEndDate();
         this.updatePeriods();
-        
-        // Mark as initialized
-        this.initialized = true;
     }
 
     toggleEndDate() {
@@ -170,7 +170,7 @@ class PeriodFormatter {
 
     /**
      * Parse a period string and extract start date, end date, and current status
-     * @param {string} periodString - The period string to parse (e.g., "ago. 2025 - actualidad")
+     * @param {string} periodString - The period string to parse (e.g., "ene. 2025 - actualidad")
      * @param {string} language - The language of the period string ('es' or 'en')
      * @returns {Object|null} - Object with startDate, endDate, and isCurrent, or null if parsing fails
      */
@@ -210,7 +210,7 @@ class PeriodFormatter {
     /**
      * Parse a date string like "ago. 2025" or "jan 2022" into YYYY-MM format
      * @param {string} dateString - The date string to parse
-     * @param {Array} months - Array of month names/abbreviations
+     * @param {string} language - The language code ('es' or 'en')
      * @returns {string|null} - Date in YYYY-MM format, or null if parsing fails
      */
     parseDateFromString(dateString, language) {
