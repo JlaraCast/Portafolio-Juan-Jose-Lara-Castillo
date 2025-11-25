@@ -61,7 +61,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="period_es" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Period (ES)') }} <span class="text-xs text-gray-500 dark:text-gray-400">({{ __('Auto-generated') }})</span></label>
-                            <input type="text" name="period[es]" id="period_es" value="{{ $experience->period['es'] ?? '' }}" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors bg-gray-50 dark:bg-gray-900" readonly required>
+                            <input type="text" name="period[es]" id="period_es" value="{{ $experience->period['es'] ?? '' }}" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors bg-gray-50 dark:bg-gray-900" readonly>
                         </div>
                         <div>
                             <label for="location_es" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Location (ES)') }}</label>
@@ -95,7 +95,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="period_en" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Period (EN)') }} <span class="text-xs text-gray-500 dark:text-gray-400">({{ __('Auto-generated') }})</span></label>
-                            <input type="text" name="period[en]" id="period_en" value="{{ $experience->period['en'] ?? '' }}" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors bg-gray-50 dark:bg-gray-900" readonly required>
+                            <input type="text" name="period[en]" id="period_en" value="{{ $experience->period['en'] ?? '' }}" maxlength="255" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors bg-gray-50 dark:bg-gray-900" readonly>
                         </div>
                         <div>
                             <label for="location_en" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ __('Location (EN)') }}</label>
