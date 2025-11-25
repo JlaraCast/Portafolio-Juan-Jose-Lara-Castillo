@@ -27,11 +27,11 @@
                 <div class="flex items-center justify-between mb-2">
                     <label for="icon" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">{{ __('Icon') }} (Devicon class)</label>
                     <button type="button" onclick="document.getElementById('icon').value = '<i class=\'devicon-php-plain\'></i>'" class="text-xs px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-lg hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors font-medium">
-                        Insertar ejemplo
+                        {{ __('Insert example') }}
                     </button>
                 </div>
                 <input type="text" name="icon" id="icon" value="{{ $skill->icon }}" maxlength="500" class="block w-full rounded-xl border-gray-300 dark:border-gray-600 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 dark:bg-gray-700 dark:text-white sm:text-sm py-2.5 transition-colors" placeholder="<i class='devicon-php-plain'></i>" required>
-                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ __('Paste SVG code or icon HTML here. Need icons? Check') }} <a href="https://devicon.dev/" target="_blank" class="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300">Devicon</a>.</p>
+                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ __('Paste SVG code. Need icons? Check Devicon.') }}</p>
             </div>
 
             <div class="flex justify-end pt-4">

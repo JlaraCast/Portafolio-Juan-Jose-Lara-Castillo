@@ -47,7 +47,7 @@
                     </div>
                 @endif
                 <input type="file" name="image" id="image" accept="image/*" class="block w-full text-sm text-gray-900 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 transition-colors">
-                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ __('Upload a new image to replace the current one (JPG, PNG, max 2MB). Note: On Vercel, file uploads are read-only. Use the URL field below for production.') }}</p>
+                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ __('Upload an image (JPG, PNG, max 2MB)') }}</p>
             </div>
 
             <div>
