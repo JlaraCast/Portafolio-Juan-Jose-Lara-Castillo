@@ -177,7 +177,7 @@ class PeriodFormatter {
     parsePeriodString(periodString, language) {
         if (!periodString) return null;
 
-        const presentKeywords = language === 'es' ? ['actualidad', 'presente'] : ['present', 'current'];
+        const presentKeywords = language === 'es' ? ['presente'] : ['present', 'current'];
 
         // Split by dash to get start and end parts
         const parts = periodString.split('-').map(p => p.trim().toLowerCase());
