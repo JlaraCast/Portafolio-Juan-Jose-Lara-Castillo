@@ -100,5 +100,15 @@
     "reset.confirm_password": "Confirmar Contraseña",
     "reset.submit": "Restablecer Contraseña",
     "reset.back_to_login": "Volver al Login",
-    "skills.filter_note": "Haz clic en una habilidad para filtrar los proyectos y experiencias relacionados."
+    "Profile updated successfully.": "Perfil actualizado exitosamente.",
+    "skills.filter_note": "Haz clic en una habilidad para filtrar los proyectos y experiencias relacionados.",
+    "Project created successfully.": "Proyecto creado exitosamente.",
+    "Project updated successfully.": "Proyecto actualizado exitosamente.",
+    "Project deleted successfully.": "Proyecto eliminado exitosamente.",
+    "Experience created successfully.": "Experiencia creada exitosamente.",
+    "Experience updated successfully.": "Experiencia actualizada exitosamente.",
+    "Experience deleted successfully.": "Experiencia eliminada exitosamente.",
+    "Skill created successfully.": "Habilidad creada exitosamente.",
+    "Skill updated successfully.": "Habilidad actualizada exitosamente.",
+    "Skill deleted successfully.": "Habilidad eliminada exitosamente."
 }

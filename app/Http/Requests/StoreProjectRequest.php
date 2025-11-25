@@ -42,16 +42,6 @@ class StoreProjectRequest extends FormRequest
      */
     public function messages(): array
     {
-        return [
-            'title_es.required' => 'The Spanish title is required.',
-            'title_en.required' => 'The English title is required.',
-            'description_es.required' => 'The Spanish description is required.',
-            'description_en.required' => 'The English description is required.',
-            'image.image' => 'The file must be an image.',
-            'image.mimes' => 'The image must be a file of type: jpeg, png, jpg.',
-            'image.max' => 'The image may not be greater than 2MB.',
-            'image.dimensions' => 'The image dimensions must not exceed 2000x2000 pixels.',
-            'skills.*.exists' => 'One or more selected skills do not exist.',
-        ];
+        return [];
     }
 }

@@ -40,10 +40,6 @@ class UpdateSkillRequest extends FormRequest
      */
     public function messages(): array
     {
-        return [
-            'name.required' => 'The skill name is required.',
-            'name.unique' => 'This skill already exists.',
-            'icon.max' => 'The icon code is too large.',
-        ];
+        return [];
     }
 }

@@ -43,7 +43,7 @@ class SkillController extends Controller
     public function store(StoreSkillRequest $request)
     {
         Skill::create($request->validated());
-        return redirect()->route('admin.skills.index')->with('success', 'Skill created successfully.');
+        return redirect()->route('admin.skills.index')->with('success', __('Skill created successfully.'));
     }
 
     public function show(Skill $skill)
@@ -72,7 +72,7 @@ class SkillController extends Controller
     public function update(UpdateSkillRequest $request, Skill $skill)
     {
         $skill->update($request->validated());
-        return redirect()->route('admin.skills.index')->with('success', 'Skill updated successfully.');
+        return redirect()->route('admin.skills.index')->with('success', __('Skill updated successfully.'));
     }
 
     /**
@@ -84,6 +84,6 @@ class SkillController extends Controller
     public function destroy(Skill $skill)
     {
         $skill->delete();
-        return redirect()->route('admin.skills.index')->with('success', 'Skill deleted successfully.');
+        return redirect()->route('admin.skills.index')->with('success', __('Skill deleted successfully.'));
     }
 }

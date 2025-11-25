@@ -47,23 +47,6 @@ class StoreExperienceRequest extends FormRequest
      */
     public function messages(): array
     {
-        return [
-            'company.es.required' => 'The Spanish company name is required.',
-            'company.en.required' => 'The English company name is required.',
-            'role.es.required' => 'The Spanish role is required.',
-            'role.en.required' => 'The English role is required.',
-            'period.es.required' => 'The Spanish period is required.',
-            'period.en.required' => 'The English period is required.',
-            'location.es.required' => 'The Spanish location is required.',
-            'location.en.required' => 'The English location is required.',
-            'description.es.required' => 'The Spanish description is required.',
-            'description.en.required' => 'The English description is required.',
-            'logo.image' => 'The logo must be an image.',
-            'logo.max' => 'The logo may not be greater than 2MB.',
-            'logo.dimensions' => 'The logo dimensions must not exceed 500x500 pixels.',
-            'type.required' => 'The experience type is required.',
-            'type.in' => 'The type must be either work or education.',
-            'skills.*.exists' => 'One or more selected skills do not exist.',
-        ];
+        return [];
     }
 }
