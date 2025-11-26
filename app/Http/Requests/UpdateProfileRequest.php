@@ -34,6 +34,9 @@ class UpdateProfileRequest extends FormRequest
                 'max:255',
                 Rule::unique('users')->ignore($userId),
             ],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'linkedin' => ['nullable', 'url', 'max:255'],
+            'github' => ['nullable', 'url', 'max:255'],
             'password' => [
                 'nullable',
                 'confirmed',

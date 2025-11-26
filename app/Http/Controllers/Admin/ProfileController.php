@@ -33,6 +33,9 @@ class ProfileController extends Controller
 
         $user->name = $validated['name'];
         $user->email = $validated['email'];
+        $user->phone = $validated['phone'] ?? null;
+        $user->linkedin = $validated['linkedin'] ?? null;
+        $user->github = $validated['github'] ?? null;
 
         if ($request->filled('password')) {
             $user->password = Hash::make($validated['password']);
