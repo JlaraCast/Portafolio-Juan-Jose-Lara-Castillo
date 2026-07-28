@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Experience;
+use App\Models\Project;
+use App\Models\Skill;
+use App\Models\User;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $user = \App\Models\User::first();
-        $projects = \App\Models\Project::with('skills')->get();
-        $skills = \App\Models\Skill::all();
-        $experiences = \App\Models\Experience::with('skills')->get();
+        $user = User::first();
+        $projects = Project::with('skills')->get();
+        $skills = Skill::all();
+        $experiences = Experience::with('skills')->get();
+
         return view('home', compact('user', 'projects', 'skills', 'experiences'));
     }
 }

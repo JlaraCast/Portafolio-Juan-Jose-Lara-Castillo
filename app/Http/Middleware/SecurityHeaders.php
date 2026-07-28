@@ -11,7 +11,7 @@ class SecurityHeaders
     /**
      * Handle an incoming request and add security headers to the response.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
@@ -48,7 +48,7 @@ class SecurityHeaders
         $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
 
         // Permissions Policy (formerly Feature Policy)
-        $response->headers->set('Permissions-Policy', 
+        $response->headers->set('Permissions-Policy',
             'geolocation=(), microphone=(), camera=()'
         );
 

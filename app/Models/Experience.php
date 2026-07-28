@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Experience Model
- * 
+ *
  * Represents work experience or education with multilingual support.
- * 
+ *
  * @property int $id
  * @property array $company Company or institution name in multiple languages (es, en)
  * @property array $role Job role or degree title in multiple languages (es, en)
@@ -20,8 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string $type Type of experience: 'work' or 'education'
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
- * 
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Skill[] $skills
+ * @property-read Collection|Skill[] $skills
  */
 class Experience extends Model
 {
@@ -54,8 +55,6 @@ class Experience extends Model
 
     /**
      * Get the skills associated with this experience.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function skills(): BelongsToMany
     {
@@ -64,8 +63,6 @@ class Experience extends Model
 
     /**
      * Get the start date from the period.
-     *
-     * @return string|null
      */
     public function getStartDateAttribute(): ?string
     {
@@ -77,10 +74,10 @@ class Experience extends Model
         $start = trim($parts[0]);
 
         try {
-            return \Carbon\Carbon::createFromFormat('F Y', $start)->format('Y-m');
+            return Carbon::createFromFormat('F Y', $start)->format('Y-m');
         } catch (\Exception $e) {
             try {
-                return \Carbon\Carbon::createFromFormat('M Y', $start)->format('Y-m');
+                return Carbon::createFromFormat('M Y', $start)->format('Y-m');
             } catch (\Exception $e) {
                 return null;
             }
@@ -89,8 +86,6 @@ class Experience extends Model
 
     /**
      * Get the end date from the period.
-     *
-     * @return string|null
      */
     public function getEndDateAttribute(): ?string
     {
@@ -99,7 +94,7 @@ class Experience extends Model
         }
 
         $parts = explode('-', $this->period['en']);
-        
+
         if (count($parts) < 2) {
             return null;
         }
@@ -111,10 +106,10 @@ class Experience extends Model
         }
 
         try {
-            return \Carbon\Carbon::createFromFormat('F Y', $end)->format('Y-m');
+            return Carbon::createFromFormat('F Y', $end)->format('Y-m');
         } catch (\Exception $e) {
             try {
-                return \Carbon\Carbon::createFromFormat('M Y', $end)->format('Y-m');
+                return Carbon::createFromFormat('M Y', $end)->format('Y-m');
             } catch (\Exception $e) {
                 return null;
             }
@@ -123,14 +118,13 @@ class Experience extends Model
 
     /**
      * Check if the experience is current.
-     *
-     * @return bool
      */
     public function getIsCurrentAttribute(): bool
     {
         if (empty($this->period['en'])) {
             return false;
         }
+
         return stripos($this->period['en'], 'Present') !== false;
     }
 }

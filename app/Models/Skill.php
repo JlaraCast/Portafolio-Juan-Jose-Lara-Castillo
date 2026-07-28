@@ -2,22 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
 
 /**
  * Skill Model
- * 
+ *
  * Represents a technical skill or technology.
- * 
+ *
  * @property int $id
  * @property string $name Skill name
  * @property string|null $icon SVG or icon HTML code
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
- * 
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Project[] $projects
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Experience[] $experiences
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property-read Collection|Project[] $projects
+ * @property-read Collection|Experience[] $experiences
  */
 class Skill extends Model
 {
@@ -30,8 +31,6 @@ class Skill extends Model
 
     /**
      * Get the projects associated with this skill.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function projects(): BelongsToMany
     {
@@ -40,8 +39,6 @@ class Skill extends Model
 
     /**
      * Get the experiences associated with this skill.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function experiences(): BelongsToMany
     {

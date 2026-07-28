@@ -17,17 +17,17 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'Juan José',
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),
             'subtitle' => [
                 'es' => 'Estudiante de Informática Empresarial | Desarrollador Backend | Apasionado por la Innovación Tecnológica | C#, PHP, HTML, Java, JavaScript',
-                'en' => 'Business Informatics Student | Backend Developer | Passionate About Technological Innovation | C#, PHP, HTML, Java, JavaScript'
+                'en' => 'Business Informatics Student | Backend Developer | Passionate About Technological Innovation | C#, PHP, HTML, Java, JavaScript',
             ],
             'description' => [
                 'es' => '',
-                'en' => ''
+                'en' => '',
             ],
             'hero_image' => null, // Removed as requested
         ]);

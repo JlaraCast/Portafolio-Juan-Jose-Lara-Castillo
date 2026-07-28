@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Skill;
 use App\Services\ImageUploadService;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ProjectController extends Controller
 {
@@ -21,30 +23,31 @@ class ProjectController extends Controller
     /**
      * Display a listing of all projects.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
         $projects = Project::with('skills')->get();
+
         return view('admin.projects.index', compact('projects'));
     }
 
     /**
      * Show the form for creating a new project.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
-        $skills = \App\Models\Skill::all();
+        $skills = Skill::all();
+
         return view('admin.projects.create', compact('skills'));
     }
 
     /**
      * Store a newly created project in the database.
      *
-     * @param \App\Http\Requests\StoreProjectRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(StoreProjectRequest $request)
     {
@@ -54,7 +57,7 @@ class ProjectController extends Controller
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $this->imageService->upload($request->file('image'), 'projects');
-        } elseif (!empty($validated['image_url_input'])) {
+        } elseif (! empty($validated['image_url_input'])) {
             $imagePath = $validated['image_url_input'];
         }
 
@@ -67,7 +70,7 @@ class ProjectController extends Controller
         ]);
 
         // Attach skills if provided
-        if (!empty($validated['skills'])) {
+        if (! empty($validated['skills'])) {
             $project->skills()->attach($validated['skills']);
         }
 
@@ -77,8 +80,7 @@ class ProjectController extends Controller
     /**
      * Display the specified project.
      *
-     * @param \App\Models\Project $project
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function show(Project $project)
     {
@@ -88,21 +90,19 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified project.
      *
-     * @param \App\Models\Project $project
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(Project $project)
     {
-        $skills = \App\Models\Skill::all();
+        $skills = Skill::all();
+
         return view('admin.projects.edit', compact('project', 'skills'));
     }
 
     /**
      * Update the specified project in the database.
      *
-     * @param \App\Http\Requests\UpdateProjectRequest $request
-     * @param \App\Models\Project $project
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
@@ -111,11 +111,11 @@ class ProjectController extends Controller
         // Handle image upload using service
         if ($request->hasFile('image')) {
             $imagePath = $this->imageService->upload(
-                $request->file('image'), 
+                $request->file('image'),
                 'projects',
                 $project->image_url
             );
-        } elseif (!empty($validated['image_url_input'])) {
+        } elseif (! empty($validated['image_url_input'])) {
             $imagePath = $validated['image_url_input'];
         } else {
             $imagePath = $project->image_url; // Keep existing image
@@ -142,8 +142,7 @@ class ProjectController extends Controller
     /**
      * Remove the specified project from the database.
      *
-     * @param \App\Models\Project $project
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy(Project $project)
     {
@@ -153,6 +152,7 @@ class ProjectController extends Controller
         }
 
         $project->delete();
+
         return redirect()->route('admin.projects.index')->with('success', __('Project deleted successfully.'));
     }
 }

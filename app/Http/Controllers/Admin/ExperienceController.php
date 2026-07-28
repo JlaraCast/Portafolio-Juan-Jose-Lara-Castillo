@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExperienceRequest;
 use App\Http\Requests\UpdateExperienceRequest;
 use App\Models\Experience;
+use App\Models\Skill;
 use App\Services\ImageUploadService;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ExperienceController extends Controller
 {
@@ -21,30 +23,31 @@ class ExperienceController extends Controller
     /**
      * Display a listing of all experiences.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
         $experiences = Experience::all();
+
         return view('admin.experiences.index', compact('experiences'));
     }
 
     /**
      * Show the form for creating a new experience.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
-        $skills = \App\Models\Skill::all();
+        $skills = Skill::all();
+
         return view('admin.experiences.create', compact('skills'));
     }
 
     /**
      * Store a newly created experience in the database.
      *
-     * @param \App\Http\Requests\StoreExperienceRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(StoreExperienceRequest $request)
     {
@@ -54,7 +57,7 @@ class ExperienceController extends Controller
         $logoPath = null;
         if ($request->hasFile('logo')) {
             $logoPath = $this->imageService->upload($request->file('logo'), 'experiences');
-        } elseif (!empty($validated['logo_url_input'])) {
+        } elseif (! empty($validated['logo_url_input'])) {
             $logoPath = $validated['logo_url_input'];
         }
 
@@ -69,7 +72,7 @@ class ExperienceController extends Controller
         ]);
 
         // Attach skills if provided
-        if (!empty($validated['skills'])) {
+        if (! empty($validated['skills'])) {
             $experience->skills()->attach($validated['skills']);
         }
 
@@ -79,21 +82,19 @@ class ExperienceController extends Controller
     /**
      * Show the form for editing the specified experience.
      *
-     * @param \App\Models\Experience $experience
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(Experience $experience)
     {
-        $skills = \App\Models\Skill::all();
+        $skills = Skill::all();
+
         return view('admin.experiences.edit', compact('experience', 'skills'));
     }
 
     /**
      * Update the specified experience in the database.
      *
-     * @param \App\Http\Requests\UpdateExperienceRequest $request
-     * @param \App\Models\Experience $experience
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(UpdateExperienceRequest $request, Experience $experience)
     {
@@ -115,7 +116,7 @@ class ExperienceController extends Controller
                 'experiences',
                 $experience->logo
             );
-        } elseif (!empty($validated['logo_url_input'])) {
+        } elseif (! empty($validated['logo_url_input'])) {
             $data['logo'] = $validated['logo_url_input'];
         }
 
@@ -134,8 +135,7 @@ class ExperienceController extends Controller
     /**
      * Remove the specified experience from the database.
      *
-     * @param \App\Models\Experience $experience
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy(Experience $experience)
     {
@@ -145,6 +145,7 @@ class ExperienceController extends Controller
         }
 
         $experience->delete();
+
         return redirect()->route('admin.experiences.index')->with('success', __('Experience deleted successfully.'));
     }
 }
