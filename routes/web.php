@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/google90b3b15fa7d9c06a.html', function () {
+    return response('google-site-verification: google90b3b15fa7d9c06a.html', 200)
+        ->header('Content-Type', 'text/html');
+});
+
 Route::middleware('throttle:10,1')->group(function () {
     Auth::routes(['register' => false]);
 });
