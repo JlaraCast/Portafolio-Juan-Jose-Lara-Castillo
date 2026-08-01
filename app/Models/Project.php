@@ -2,24 +2,25 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
 
 /**
  * Project Model
- * 
+ *
  * Represents a portfolio project with multilingual support.
- * 
+ *
  * @property int $id
  * @property array $title Title in multiple languages (es, en)
  * @property array $description Description in multiple languages (es, en)
  * @property string|null $image_url Project image URL
  * @property string|null $github_url GitHub repository URL
  * @property string|null $live_url Live project URL
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
- * 
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Skill[] $skills
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property-read Collection|Skill[] $skills
  */
 class Project extends Model
 {
@@ -42,8 +43,6 @@ class Project extends Model
 
     /**
      * Get the skills associated with this project.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function skills(): BelongsToMany
     {

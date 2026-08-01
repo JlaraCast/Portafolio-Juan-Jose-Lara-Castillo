@@ -1,11 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\ExperienceController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LanguageController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -22,19 +25,19 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
-    
+
     Route::resource('projects', ProjectController::class);
     Route::resource('skills', SkillController::class);
-    Route::resource('experiences', \App\Http\Controllers\Admin\ExperienceController::class);
+    Route::resource('experiences', ExperienceController::class);
 
-    Route::get('/profile', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
-Route::get('lang/{locale}', [\App\Http\Controllers\LanguageController::class, 'switch'])->name('lang.switch');
+Route::get('lang/{locale}', [LanguageController::class, 'switch'])->name('lang.switch');
 
 Route::get('/test-migrate', function () {
-    \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+    Artisan::call('migrate', ['--force' => true]);
+
     return 'Migrations run successfully';
 });
-
