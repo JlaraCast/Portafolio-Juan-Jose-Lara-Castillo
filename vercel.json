@@ -10,7 +10,7 @@
     },
     "routes": [
         {
-            "src": "/((?:build|storage|images|js|css|fonts|robots\\.txt|favicon\\.ico|google[a-z0-9]+\\.html).*)",
+            "src": "/((?:build|storage|images|js|css|fonts|robots\\.txt|sitemap\\.xml|site\\.webmanifest|favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png|icon-(?:16|32|192|512)\\.png|google[a-z0-9]+\\.html).*)",
             "dest": "/$1",
             "headers": {
                 "Access-Control-Allow-Origin": "*"

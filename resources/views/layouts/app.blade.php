@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-site-verification" content="google90b3b15fa7d9c06a">
     @php($metaDescription = trim(strip_tags(localized($user->subtitle))))
+    @php($ogImage = asset('images/og-default.png'))
     <title>@yield('title', 'Portfolio')</title>
     <meta name="description" content="{{ Str::limit($metaDescription, 155) }}">
     <link rel="canonical" href="{{ url()->current() }}">
@@ -16,7 +17,38 @@
     <meta property="og:description" content="{{ Str::limit($metaDescription, 155) }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:locale" content="{{ app()->getLocale() }}">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="{{ $ogImage }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ $ogImage }}">
+
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+    <meta name="theme-color" content="#4f46e5">
+
+    <script type="application/ld+json">
+        {!! json_encode([
+            '@@context' => 'https://schema.org',
+            '@@graph' => [
+                [
+                    '@@type' => 'Person',
+                    'name' => $user->name,
+                    'jobTitle' => $metaDescription,
+                    'email' => 'mailto:'.$user->email,
+                    'url' => url('/'),
+                    'sameAs' => array_values(array_filter([$user->linkedin, $user->github])),
+                ],
+                [
+                    '@@type' => 'WebSite',
+                    'name' => $user->name.' - Portfolio',
+                    'url' => url('/'),
+                ],
+            ],
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+    </script>
 
     {{-- Self-hosted fonts: no hop to fonts.googleapis.com/gstatic.com, and
          preloaded so they do not wait on app.css being parsed. --}}
