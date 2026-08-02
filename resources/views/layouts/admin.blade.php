@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-site-verification" content="google90b3b15fa7d9c06a">
     <title>@yield('title', 'Admin Panel') - Portfolio Admin</title>
+    <meta name="robots" content="noindex, nofollow">
     <link rel="preload" href="{{ asset('fonts/outfit-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ asset('vendor/devicon/devicon.css') }}" media="print" data-deferred-style>
     <noscript><link rel="stylesheet" href="{{ asset('vendor/devicon/devicon.css') }}"></noscript>

@@ -6,7 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-site-verification" content="google90b3b15fa7d9c06a">
+    @php($metaDescription = trim(strip_tags($user->subtitle[app()->getLocale()] ?? $user->subtitle['es'] ?? '')))
     <title>@yield('title', 'Portfolio')</title>
+    <meta name="description" content="{{ Str::limit($metaDescription, 155) }}">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ $user->name }}">
+    <meta property="og:title" content="@yield('title', 'Portfolio')">
+    <meta property="og:description" content="{{ Str::limit($metaDescription, 155) }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:locale" content="{{ app()->getLocale() }}">
+    <meta name="twitter:card" content="summary">
 
     {{-- Self-hosted fonts: no hop to fonts.googleapis.com/gstatic.com, and
          preloaded so they do not wait on app.css being parsed. --}}
