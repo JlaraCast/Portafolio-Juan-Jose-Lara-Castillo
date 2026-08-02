@@ -10,11 +10,7 @@
     <link rel="preload" href="{{ asset('fonts/outfit-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
 
         <script nonce="{{ Vite::cspNonce() }}">
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+        document.documentElement.classList.toggle('dark', localStorage.theme !== 'light');
     </script>
     
     {{-- The stylesheet is inlined: as a <link> it was the last request

@@ -56,11 +56,7 @@
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
 
     <script nonce="{{ Vite::cspNonce() }}">
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+        document.documentElement.classList.toggle('dark', localStorage.theme !== 'light');
     </script>
 
     {{-- The stylesheet is inlined: as a <link> it was the last request
