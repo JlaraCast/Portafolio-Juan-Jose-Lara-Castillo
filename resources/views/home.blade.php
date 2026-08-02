@@ -61,7 +61,7 @@
                      data-skill-ids="{{ $experience->skills->pluck('id')->implode(',') }}">
                     @if($experience->logo)
                         <div class="flex-shrink-0 bg-white p-2 rounded-lg shadow-sm">
-                            <img src="{{ $experience->logo }}" alt="{{ $experience->company['es'] ?? '' }}" class="w-16 h-16 object-contain">
+                            <img src="{{ $imageService->optimizedUrl($experience->logo) }}" alt="{{ $experience->company['es'] ?? '' }}" width="64" height="64" loading="lazy" decoding="async" class="w-16 h-16 object-contain">
                         </div>
                     @endif
                     <div class="flex-1 w-full">
@@ -99,7 +99,9 @@
                 <div class="project-card bg-white dark:bg-purple-900/50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-purple-700 flex flex-col h-full"
                      data-skill-ids="{{ $project->skills->pluck('id')->implode(',') }}">
                     <div class="relative overflow-hidden group h-48 bg-gradient-to-br from-emerald-500 to-emerald-600 dark:from-indigo-600 dark:to-purple-700">
-                        <img class="h-full w-full object-cover transform group-hover:scale-110 transition-transform duration-500" src="{{ $project->image_url }}" alt="{{ $project->title['es'] ?? '' }}">
+                        @if($project->image_url)
+                            <img class="h-full w-full object-cover transform group-hover:scale-110 transition-transform duration-500" src="{{ $imageService->optimizedUrl($project->image_url) }}" alt="{{ $project->title['es'] ?? '' }}" width="400" height="192" loading="lazy" decoding="async">
+                        @endif
                         <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
                             @if($project->github_url)
                                 <a href="{{ $project->github_url }}" target="_blank" class="p-2 bg-white rounded-full text-gray-900 hover:text-emerald-600 transition-colors" title="View Code">

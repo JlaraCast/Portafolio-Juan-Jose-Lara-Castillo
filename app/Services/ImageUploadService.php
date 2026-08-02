@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -52,29 +53,16 @@ class ImageUploadService
         // Determine disk based on environment
         $disk = env('FILESYSTEM_DISK', 'public');
 
-        if ($disk === 'cloudinary') {
-            // Extract public ID from Cloudinary URL
-            // Example: https://res.cloudinary.com/demo/image/upload/v1/sample.jpg -> sample
-            // This is a simplified extraction, might need adjustment based on actual URL structure
-            $publicId = pathinfo($path, PATHINFO_FILENAME);
-            // Note: Cloudinary deletion usually requires the full public ID including folders.
-            // For now, we'll try to delete using the URL if the package supports it, or skip if complex.
-            // The package usually provides a way to delete by public ID.
-            // Assuming we stored it, we might not have the public ID easily.
-            // Let's try to parse it.
+        if ($disk === 'cloudinary' && str_contains($path, 'cloudinary.com')) {
+            $publicId = $this->extractCloudinaryPublicId($path);
 
-            // Better approach: If it's a full URL, it's likely Cloudinary.
-            if (str_contains($path, 'cloudinary.com')) {
-                // Extract public ID: folder/filename (without extension)
-                $parts = explode('/', parse_url($path, PHP_URL_PATH));
-                $filename = end($parts);
-                $publicId = pathinfo($filename, PATHINFO_FILENAME);
-
-                // If there are folders, we need them too.
-                // This is tricky without storing the public_id in DB.
-                // For now, let's just return true as deleting from Cloudinary isn't critical for the portfolio to work.
-                return true;
+            if (! $publicId) {
+                return false;
             }
+
+            $result = Cloudinary::destroy($publicId);
+
+            return ($result['result'] ?? null) === 'ok';
         }
 
         // Remove '/storage/' prefix to get the actual storage path
@@ -110,5 +98,43 @@ class ImageUploadService
         }
 
         return '/storage/'.$path;
+    }
+
+    /**
+     * Get a Cloudinary URL with delivery optimizations applied (auto format/quality).
+     * Non-Cloudinary URLs (local storage) are returned unchanged.
+     *
+     * @param  string|null  $url  The image URL
+     * @param  string  $transformations  Cloudinary transformation string
+     */
+    public function optimizedUrl(?string $url, string $transformations = 'f_auto,q_auto'): ?string
+    {
+        if (! $url || ! str_contains($url, '/upload/')) {
+            return $url;
+        }
+
+        return str_replace('/upload/', "/upload/{$transformations}/", $url);
+    }
+
+    /**
+     * Extract the Cloudinary public ID (folder/filename without version or extension)
+     * from a delivery URL.
+     */
+    private function extractCloudinaryPublicId(string $url): ?string
+    {
+        $path = parse_url($url, PHP_URL_PATH);
+
+        if (! $path || ! str_contains($path, '/upload/')) {
+            return null;
+        }
+
+        // Everything after "/upload/", e.g. "v1700000000/projects/abc123.jpg"
+        $afterUpload = substr($path, strpos($path, '/upload/') + strlen('/upload/'));
+
+        // Drop a leading version segment like "v1700000000/"
+        $afterUpload = preg_replace('#^v\d+/#', '', $afterUpload);
+
+        // Drop the file extension
+        return preg_replace('#\.[a-zA-Z0-9]+$#', '', $afterUpload);
     }
 }
