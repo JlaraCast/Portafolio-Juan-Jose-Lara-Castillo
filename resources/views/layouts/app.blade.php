@@ -9,8 +9,12 @@
     <title>@yield('title', 'Portfolio')</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://res.cloudinary.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/devicons/devicon@2.17.0/devicon.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@2.17.0/devicon.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@2.17.0/devicon.min.css"></noscript>
 
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
