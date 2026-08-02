@@ -122,18 +122,6 @@
         </div>
     </footer>
 
-    <script nonce="{{ Vite::cspNonce() }}">
-        window.translations = {
-            minCharacters: "{{ __('Min 8 characters') }}",
-            lowercase: "{{ __('One lowercase letter') }}",
-            uppercase: "{{ __('One uppercase letter') }}",
-            number: "{{ __('One number') }}",
-            specialChar: "{{ __('One special character') }}",
-            passwordsMatch: "{{ __('Passwords match') }}",
-            passwordsDontMatch: "{{ __('Passwords do not match') }}",
-            characters: "{{ __('characters') }}"
-        };
-    </script>
 </body>
 
 </html>

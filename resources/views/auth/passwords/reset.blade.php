@@ -88,6 +88,19 @@
     </div>
 </div>
 
+{{-- Only form-validation.js reads these, and only this page loads it. --}}
+<script nonce="{{ Vite::cspNonce() }}">
+        window.translations = {
+            minCharacters: "{{ __('Min 8 characters') }}",
+            lowercase: "{{ __('One lowercase letter') }}",
+            uppercase: "{{ __('One uppercase letter') }}",
+            number: "{{ __('One number') }}",
+            specialChar: "{{ __('One special character') }}",
+            passwordsMatch: "{{ __('Passwords match') }}",
+            passwordsDontMatch: "{{ __('Passwords do not match') }}",
+            characters: "{{ __('characters') }}"
+        };
+    </script>
 <script nonce="{{ Vite::cspNonce() }}" src="{{ asset('js/dom-icons.js') }}"></script>
 <script nonce="{{ Vite::cspNonce() }}" src="{{ asset('js/form-validation.js') }}"></script>
 @endsection
