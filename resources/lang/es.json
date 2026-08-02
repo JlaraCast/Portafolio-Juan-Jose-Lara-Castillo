@@ -141,5 +141,8 @@
     "Contact & Social": "Contacto y Redes Sociales",
     "Phone": "Teléfono",
     "LinkedIn": "LinkedIn",
-    "GitHub": "GitHub"
+    "GitHub": "GitHub",
+    "projects.view_code": "Ver código",
+    "projects.live_demo": "Ver demo",
+    "Toggle dark mode": "Cambiar modo oscuro"
 }
