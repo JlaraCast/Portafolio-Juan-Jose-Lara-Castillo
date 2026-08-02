@@ -6,12 +6,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-site-verification" content="google90b3b15fa7d9c06a">
     <title>@yield('title', 'Admin Panel') - Portfolio Admin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-    
-        <script>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preload" href="{{ asset('fonts/outfit-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+
+        <script nonce="{{ Vite::cspNonce() }}">
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -19,7 +17,10 @@
         }
     </script>
     
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- The stylesheet is inlined: as a <link> it was the last request
+         blocking first render. The module script is deferred by nature. --}}
+    {!! \App\Support\InlineVite::styles('resources/css/app.css') !!}
+    @vite(['resources/js/app.js'])
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 font-sans antialiased transition-colors duration-300">
     <div class="min-h-screen flex">
@@ -29,16 +30,16 @@
                 <span class="text-2xl font-extrabold bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-indigo-400 dark:to-purple-500 bg-clip-text text-transparent">{{ __('Admin Panel') }}</span>
             </div>
             <nav class="flex-1 px-4 py-6 space-y-3 overflow-y-auto">
-                <a href="{{ route('admin.dashboard') }}" class="flex items-center px-4 py-3.5 text-sm font-medium rounded-2xl transition-all duration-200 group {{ request()->routeIs('admin.dashboard') ? 'bg-emerald-50 dark:bg-indigo-900/20 text-emerald-600 dark:text-indigo-400 shadow-sm ring-1 ring-emerald-100 dark:ring-indigo-800' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-emerald-600 dark:hover:text-indigo-400' }}">
-                    <svg class="w-5 h-5 mr-3 {{ request()->routeIs('admin.dashboard') ? 'text-emerald-600 dark:text-indigo-400' : 'text-gray-400 dark:text-gray-500 group-hover:text-emerald-600 dark:group-hover:text-indigo-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center px-4 py-3.5 text-sm font-medium rounded-2xl transition-all duration-200 group {{ request()->routeIs('admin.dashboard') ? 'bg-emerald-50 dark:bg-indigo-900/20 text-emerald-700 dark:text-indigo-400 shadow-sm ring-1 ring-emerald-100 dark:ring-indigo-800' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-emerald-700 dark:hover:text-indigo-400' }}">
+                    <svg class="w-5 h-5 mr-3 {{ request()->routeIs('admin.dashboard') ? 'text-emerald-700 dark:text-indigo-400' : 'text-gray-400 dark:text-gray-500 group-hover:text-emerald-700 dark:group-hover:text-indigo-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                     {{ __('Dashboard') }}
                 </a>
                 <a href="{{ route('admin.projects.index') }}" class="flex items-center px-4 py-3.5 text-sm font-medium rounded-2xl transition-all duration-200 group {{ request()->routeIs('admin.projects.*') ? 'bg-indigo-50 dark:bg-purple-900/20 text-indigo-600 dark:text-purple-400 shadow-sm ring-1 ring-indigo-100 dark:ring-purple-800' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-indigo-600 dark:hover:text-purple-400' }}">
                     <svg class="w-5 h-5 mr-3 {{ request()->routeIs('admin.projects.*') ? 'text-indigo-600 dark:text-purple-400' : 'text-gray-400 dark:text-gray-500 group-hover:text-indigo-600 dark:group-hover:text-purple-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                     {{ __('Projects') }}
                 </a>
-                <a href="{{ route('admin.skills.index') }}" class="flex items-center px-4 py-3.5 text-sm font-medium rounded-2xl transition-all duration-200 group {{ request()->routeIs('admin.skills.*') ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 shadow-sm ring-1 ring-emerald-100 dark:ring-emerald-800' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-emerald-600 dark:hover:text-emerald-400' }}">
-                    <svg class="w-5 h-5 mr-3 {{ request()->routeIs('admin.skills.*') ? 'text-emerald-600 dark:text-emerald-400' : 'text-gray-400 dark:text-gray-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <a href="{{ route('admin.skills.index') }}" class="flex items-center px-4 py-3.5 text-sm font-medium rounded-2xl transition-all duration-200 group {{ request()->routeIs('admin.skills.*') ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 shadow-sm ring-1 ring-emerald-100 dark:ring-emerald-800' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-emerald-700 dark:hover:text-emerald-400' }}">
+                    <svg class="w-5 h-5 mr-3 {{ request()->routeIs('admin.skills.*') ? 'text-emerald-700 dark:text-emerald-400' : 'text-gray-400 dark:text-gray-500 group-hover:text-emerald-700 dark:group-hover:text-emerald-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     {{ __('Skills') }}
                 </a>
                 <a href="{{ route('admin.experiences.index') }}" class="flex items-center px-4 py-3.5 text-sm font-medium rounded-2xl transition-all duration-200 group {{ request()->routeIs('admin.experiences.*') ? 'bg-purple-50 dark:bg-pink-900/20 text-purple-600 dark:text-pink-400 shadow-sm ring-1 ring-purple-100 dark:ring-pink-800' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-purple-600 dark:hover:text-pink-400' }}">
@@ -76,7 +77,7 @@
                     </button>
                 </div>
                 <div class="flex items-center justify-end w-full space-x-6">
-                    <a href="{{ route('home') }}" target="_blank" class="text-sm font-medium text-emerald-600 dark:text-indigo-400 hover:text-emerald-700 dark:hover:text-indigo-300 flex items-center transition-colors" aria-label="View portfolio in new tab">
+                    <a href="{{ route('home') }}" target="_blank" class="text-sm font-medium text-emerald-700 dark:text-indigo-400 hover:text-emerald-700 dark:hover:text-indigo-300 flex items-center transition-colors" aria-label="View portfolio in new tab">
                         {{ __('View Portfolio') }}
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                     </a>
@@ -169,7 +170,7 @@
     </div>
 
     <!-- Translation variables for JavaScript -->
-    <script>
+    <script nonce="{{ Vite::cspNonce() }}">
         window.translations = {
             minCharacters: "{{ __('Min 8 characters') }}",
             lowercase: "{{ __('One lowercase letter') }}",
@@ -185,11 +186,13 @@
         };
     </script>
     
+    <!-- SVG builders shared by the form scripts (no innerHTML, Trusted Types safe) -->
+    <script nonce="{{ Vite::cspNonce() }}" src="{{ asset('js/dom-icons.js') }}"></script>
     <!-- Form Validation Script -->
-    <script src="{{ asset('js/form-validation.js') }}"></script>
+    <script nonce="{{ Vite::cspNonce() }}" src="{{ asset('js/form-validation.js') }}"></script>
     <!-- Form Loading State Script -->
-    <script src="{{ asset('js/form-loading.js') }}"></script>
+    <script nonce="{{ Vite::cspNonce() }}" src="{{ asset('js/form-loading.js') }}"></script>
     <!-- Delete Modal Script -->
-    <script src="{{ asset('js/delete-modal.js') }}"></script>
+    <script nonce="{{ Vite::cspNonce() }}" src="{{ asset('js/delete-modal.js') }}"></script>
 </body>
 </html>

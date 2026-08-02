@@ -128,7 +128,7 @@
     "skills.title": "Technical Skills",
     "projects.title": "Experience",
     "projects.heading": "Projects",
-    "contact.title": "Contact Me",
+    "contact.title": "Ready to collaborate?",
     "contact.phone": "Phone",
     "contact.profile": "View profile",
     "contact.close": "Close",
@@ -140,5 +140,10 @@
     "Contact & Social": "Contact & Social",
     "Phone": "Phone",
     "LinkedIn": "LinkedIn",
-    "GitHub": "GitHub"
+    "GitHub": "GitHub",
+    "projects.view_code": "View code",
+    "projects.live_demo": "Live demo",
+    "Toggle dark mode": "Toggle dark mode",
+    "footer": "All rights reserved",
+    "skills.filter_note": "Click on a skill to filter related projects and experiences."
 }

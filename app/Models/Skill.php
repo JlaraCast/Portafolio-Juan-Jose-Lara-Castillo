@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Observers\SkillObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -20,6 +22,7 @@ use Illuminate\Support\Carbon;
  * @property-read Collection|Project[] $projects
  * @property-read Collection|Experience[] $experiences
  */
+#[ObservedBy(SkillObserver::class)]
 class Skill extends Model
 {
     /**

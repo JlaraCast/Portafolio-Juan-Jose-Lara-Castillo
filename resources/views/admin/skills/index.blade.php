@@ -5,7 +5,7 @@
 @section('content')
 <div class="flex justify-between items-center mb-8">
     <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">{{ __('Skills') }}</h2>
-    <a href="{{ route('admin.skills.create') }}" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-full font-medium shadow-lg shadow-emerald-500/30 transition-all hover:scale-105 flex items-center">
+    <a href="{{ route('admin.skills.create') }}" class="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-2.5 rounded-full font-medium shadow-lg shadow-emerald-500/30 transition-all hover:scale-105 flex items-center">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
         {{ __('Add Skill') }}
     </a>
@@ -39,7 +39,7 @@
                 </td>
 
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <a href="{{ route('admin.skills.edit', $skill) }}" class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-300 mr-4 font-semibold">{{ __('Edit') }}</a>
+                    <a href="{{ route('admin.skills.edit', $skill) }}" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-300 mr-4 font-semibold">{{ __('Edit') }}</a>
                     <button type="button" 
                         data-confirm-delete="{{ __('Are you sure you want to delete this skill? This action cannot be undone.') }}"
                         data-url="{{ route('admin.skills.destroy', $skill) }}"
