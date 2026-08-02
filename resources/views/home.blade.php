@@ -61,7 +61,14 @@
                      data-skill-ids="{{ $experience->skills->pluck('id')->implode(',') }}">
                     @if($experience->logo)
                         <div class="flex-shrink-0 bg-white p-2 rounded-lg shadow-sm">
-                            <img src="{{ $imageService->optimizedUrl($experience->logo) }}" alt="{{ localized($experience->company) }}" width="64" height="64" loading="lazy" decoding="async" class="w-16 h-16 object-contain">
+                            {{-- display:contents keeps <picture> out of the layout, so the
+                                 img sizing below still resolves against the wrapper div. --}}
+                            <picture class="contents">
+                                @if($webp = $imageService->webpVariant($experience->logo))
+                                    <source srcset="{{ $webp }}" type="image/webp">
+                                @endif
+                                <img src="{{ $imageService->optimizedUrl($experience->logo) }}" alt="{{ localized($experience->company) }}" width="64" height="64" loading="lazy" decoding="async" class="w-16 h-16 object-contain">
+                            </picture>
                         </div>
                     @endif
                     <div class="flex-1 w-full">
@@ -100,7 +107,12 @@
                      data-skill-ids="{{ $project->skills->pluck('id')->implode(',') }}">
                     <div class="relative overflow-hidden group h-48 bg-gradient-to-br from-emerald-500 to-emerald-600 dark:from-indigo-600 dark:to-purple-700">
                         @if($project->image_url)
-                            <img class="h-full w-full object-cover transform group-hover:scale-110 transition-transform duration-500" src="{{ $imageService->optimizedUrl($project->image_url) }}" alt="{{ localized($project->title) }}" width="400" height="192" loading="lazy" decoding="async">
+                            <picture class="contents">
+                                @if($webp = $imageService->webpVariant($project->image_url))
+                                    <source srcset="{{ $webp }}" type="image/webp">
+                                @endif
+                                <img class="h-full w-full object-cover transform group-hover:scale-110 transition-transform duration-500" src="{{ $imageService->optimizedUrl($project->image_url) }}" alt="{{ localized($project->title) }}" width="400" height="192" loading="lazy" decoding="async">
+                            </picture>
                         @endif
                         <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
                             @if($project->github_url)

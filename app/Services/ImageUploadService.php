@@ -117,6 +117,37 @@ class ImageUploadService
     }
 
     /**
+     * The WebP sibling of a bundled image, when one has been generated.
+     *
+     * Cloudinary already negotiates the format through f_auto, but images
+     * shipped under public/images are served as-is, so the template has to
+     * offer the modern format itself. Returns null when there is nothing to
+     * offer, and the caller falls back to the original.
+     */
+    public function webpVariant(?string $url): ?string
+    {
+        if (! $url) {
+            return null;
+        }
+
+        // Some rows store an absolute URL to the production domain rather than
+        // a path, so match on the path and hand back a relative one.
+        $path = parse_url($url, PHP_URL_PATH) ?: $url;
+
+        if (! str_starts_with($path, '/images/')) {
+            return null;
+        }
+
+        $webp = preg_replace('/\.(png|jpe?g)$/i', '.webp', $path);
+
+        if ($webp === null || $webp === $path) {
+            return null;
+        }
+
+        return is_file(public_path(ltrim($webp, '/'))) ? $webp : null;
+    }
+
+    /**
      * Extract the Cloudinary public ID (folder/filename without version or extension)
      * from a delivery URL.
      */
