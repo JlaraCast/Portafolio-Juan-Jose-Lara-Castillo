@@ -5,14 +5,6 @@
  * (no `unsafe-inline`) blocks.
  */
 
-function activateDeferredStylesheets() {
-    // Sheets marked media="print" do not block rendering; once loaded we flip
-    // them to "all" so they apply.
-    document.querySelectorAll('link[data-deferred-style]').forEach((link) => {
-        link.media = 'all';
-    });
-}
-
 function initContactModal() {
     const modal = document.getElementById('contact-modal');
 
@@ -130,7 +122,6 @@ function initFieldFillers() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    activateDeferredStylesheets();
     initContactModal();
     initSkillFilter();
     initFileInputLabels();

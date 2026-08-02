@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ResolvableDeviconIcon;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +25,7 @@ class StoreSkillRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:100|unique:skills,name',
-            'icon' => 'nullable|string|max:5000',
+            'icon' => ['nullable', 'string', 'max:5000', app(ResolvableDeviconIcon::class)],
         ];
     }
 

@@ -8,8 +8,6 @@
     <title>@yield('title', 'Admin Panel') - Portfolio Admin</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="preload" href="{{ asset('fonts/outfit-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="{{ asset('vendor/devicon/devicon.css') }}" media="print" data-deferred-style>
-    <noscript><link rel="stylesheet" href="{{ asset('vendor/devicon/devicon.css') }}"></noscript>
 
         <script nonce="{{ Vite::cspNonce() }}">
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {

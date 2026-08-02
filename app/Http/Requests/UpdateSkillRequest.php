@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ResolvableDeviconIcon;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -30,7 +31,7 @@ class UpdateSkillRequest extends FormRequest
                 'max:100',
                 Rule::unique('skills', 'name')->ignore($this->skill),
             ],
-            'icon' => 'nullable|string|max:5000',
+            'icon' => ['nullable', 'string', 'max:5000', app(ResolvableDeviconIcon::class)],
         ];
     }
 

@@ -32,12 +32,6 @@
     </script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    {{-- Self-hosted Devicon subset (12 icons, ~5 KB against the 130 KB of CSS
-         plus 1.5 MB font of the full CDN package). media="print" keeps it off
-         the critical path; ui.js flips it to "all" once loaded. --}}
-    <link rel="stylesheet" href="{{ asset('vendor/devicon/devicon.css') }}" media="print" data-deferred-style>
-    <noscript><link rel="stylesheet" href="{{ asset('vendor/devicon/devicon.css') }}"></noscript>
 </head>
 
 <body class="bg-slate-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 font-sans antialiased transition-colors duration-300">
