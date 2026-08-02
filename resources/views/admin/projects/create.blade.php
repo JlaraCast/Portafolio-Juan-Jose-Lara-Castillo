@@ -45,7 +45,7 @@
                         {{ __('Choose File') }}
                     </label>
                     <span id="image_filename" class="ml-3 text-sm text-gray-500 dark:text-gray-400">{{ __('No file chosen') }}</span>
-                    <input type="file" name="image" id="image" accept="image/*" class="sr-only" onchange="document.getElementById('image_filename').textContent = this.files[0] ? this.files[0].name : '{{ __('No file chosen') }}'">
+                    <input type="file" name="image" id="image" accept="image/*" class="sr-only" data-filename-target="image_filename">
                 </div>
                 <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Upload an image (JPG, PNG, max 2MB)') }}</p>
             </div>

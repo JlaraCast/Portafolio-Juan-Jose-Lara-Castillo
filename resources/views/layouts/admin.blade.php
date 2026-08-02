@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/devicon/devicon.css') }}" media="print" data-deferred-style>
     <noscript><link rel="stylesheet" href="{{ asset('vendor/devicon/devicon.css') }}"></noscript>
 
-        <script>
+        <script nonce="{{ Vite::cspNonce() }}">
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -168,7 +168,7 @@
     </div>
 
     <!-- Translation variables for JavaScript -->
-    <script>
+    <script nonce="{{ Vite::cspNonce() }}">
         window.translations = {
             minCharacters: "{{ __('Min 8 characters') }}",
             lowercase: "{{ __('One lowercase letter') }}",
@@ -184,11 +184,13 @@
         };
     </script>
     
+    <!-- SVG builders shared by the form scripts (no innerHTML, Trusted Types safe) -->
+    <script nonce="{{ Vite::cspNonce() }}" src="{{ asset('js/dom-icons.js') }}"></script>
     <!-- Form Validation Script -->
-    <script src="{{ asset('js/form-validation.js') }}"></script>
+    <script nonce="{{ Vite::cspNonce() }}" src="{{ asset('js/form-validation.js') }}"></script>
     <!-- Form Loading State Script -->
-    <script src="{{ asset('js/form-loading.js') }}"></script>
+    <script nonce="{{ Vite::cspNonce() }}" src="{{ asset('js/form-loading.js') }}"></script>
     <!-- Delete Modal Script -->
-    <script src="{{ asset('js/delete-modal.js') }}"></script>
+    <script nonce="{{ Vite::cspNonce() }}" src="{{ asset('js/delete-modal.js') }}"></script>
 </body>
 </html>

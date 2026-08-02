@@ -24,7 +24,7 @@
             <div>
                 <div class="flex items-center justify-between mb-2">
                     <label for="icon" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">{{ __('Icon') }} (Devicon class)</label>
-                    <button type="button" onclick="document.getElementById('icon').value = '<i class=\'devicon-php-plain\'></i>'" class="text-xs px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-lg hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors font-medium">
+                    <button type="button" data-fill-target="icon" data-fill-value="&lt;i class=&#039;devicon-php-plain&#039;&gt;&lt;/i&gt;" class="text-xs px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-lg hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors font-medium">
                         {{ __('Insert example') }}
                     </button>
                 </div>

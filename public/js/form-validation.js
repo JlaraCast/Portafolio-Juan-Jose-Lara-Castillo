@@ -67,12 +67,12 @@ function addPasswordValidation(passwordInput, confirmInput) {
         const item = document.createElement('div');
         item.className = 'flex items-center text-xs text-gray-500 dark:text-gray-400';
         item.id = `pwd_${req.id}`;
-        item.innerHTML = `
-            <svg class="w-4 h-4 mr-2 requirement-icon" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>${req.text}</span>
-        `;
+        item.appendChild(domIcons.statusIcon('check', 'w-4 h-4 mr-2 requirement-icon'));
+
+        const label = document.createElement('span');
+        label.textContent = req.text;
+        item.appendChild(label);
+
         validationDiv.appendChild(item);
     });
 
@@ -122,20 +122,16 @@ function addPasswordValidation(passwordInput, confirmInput) {
 
         if (matches) {
             matchDiv.className = 'mt-1 text-xs text-green-600 dark:text-green-300 flex items-center';
-            matchDiv.innerHTML = `
-                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                ${t.passwordsMatch || 'Passwords match'}
-            `;
+            matchDiv.replaceChildren(
+                domIcons.statusIcon('check', 'w-4 h-4 mr-1'),
+                document.createTextNode(t.passwordsMatch || 'Passwords match')
+            );
         } else {
             matchDiv.className = 'mt-1 text-xs text-red-600 dark:text-red-300 flex items-center';
-            matchDiv.innerHTML = `
-                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                </svg>
-                ${t.passwordsDontMatch || 'Passwords do not match'}
-            `;
+            matchDiv.replaceChildren(
+                domIcons.statusIcon('cross', 'w-4 h-4 mr-1'),
+                document.createTextNode(t.passwordsDontMatch || 'Passwords do not match')
+            );
         }
     };
 
@@ -159,7 +155,7 @@ function addFileValidation(input) {
 
     input.addEventListener('change', function (e) {
         const file = e.target.files[0];
-        validationDiv.innerHTML = '';
+        validationDiv.replaceChildren();
 
         if (!file) return;
 
@@ -185,24 +181,10 @@ function addFileValidation(input) {
 
         if (errors.length > 0) {
             validationDiv.className = 'mt-2 text-xs text-red-600 dark:text-red-400';
-            validationDiv.innerHTML = errors.map(err => `
-                <div class="flex items-center">
-                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                    </svg>
-                    ${err}
-                </div>
-            `).join('');
+            validationDiv.replaceChildren(...errors.map(err => domIcons.iconRow('cross', err)));
         } else {
             validationDiv.className = 'mt-2 text-xs text-green-600 dark:text-green-400';
-            validationDiv.innerHTML = `
-                <div class="flex items-center">
-                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                    </svg>
-                    ${info.join(' • ')}
-                </div>
-            `;
+            validationDiv.replaceChildren(domIcons.iconRow('check', info.join(' • ')));
         }
     });
 

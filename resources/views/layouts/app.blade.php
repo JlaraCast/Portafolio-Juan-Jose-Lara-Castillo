@@ -13,7 +13,7 @@
     <link rel="preload" href="{{ asset('fonts/outfit-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
 
-    <script>
+    <script nonce="{{ Vite::cspNonce() }}">
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -115,7 +115,7 @@
         </div>
     </footer>
 
-    <script>
+    <script nonce="{{ Vite::cspNonce() }}">
         window.translations = {
             minCharacters: "{{ __('Min 8 characters') }}",
             lowercase: "{{ __('One lowercase letter') }}",

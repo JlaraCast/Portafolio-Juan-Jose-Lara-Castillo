@@ -88,5 +88,6 @@
     </div>
 </div>
 
-<script src="{{ asset('js/form-validation.js') }}"></script>
+<script nonce="{{ Vite::cspNonce() }}" src="{{ asset('js/dom-icons.js') }}"></script>
+<script nonce="{{ Vite::cspNonce() }}" src="{{ asset('js/form-validation.js') }}"></script>
 @endsection

@@ -21,7 +21,7 @@
             <span data-translate-json="{{ json_encode($user->description) }}">{{ $user->description['es'] ?? '' }}</span>
         </div>
         <div class="mt-10 max-w-md mx-auto sm:flex sm:justify-center gap-4">
-            <button onclick="openContactModal()" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-emerald-600 hover:bg-emerald-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 transition-transform hover:scale-105 shadow-lg shadow-emerald-500/30 dark:shadow-indigo-500/30">
+            <button type="button" data-modal-open="contact-modal" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-emerald-600 hover:bg-emerald-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 transition-transform hover:scale-105 shadow-lg shadow-emerald-500/30 dark:shadow-indigo-500/30">
                 <span data-translate="hero.contact">Contáctame</span>
             </button>
             <a href="#projects" class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 dark:border-gray-600 text-base font-medium rounded-full text-emerald-600 dark:text-indigo-400 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 md:py-4 md:text-lg md:px-10 transition-transform hover:scale-105">
@@ -36,8 +36,7 @@
         <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
             @foreach($skills as $skill)
                 <div class="skill-card cursor-pointer bg-white dark:bg-gray-800 px-6 py-4 rounded-full shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700 group hover:scale-105"
-                     data-skill-id="{{ $skill->id }}"
-                     onclick="filterBySkill({{ $skill->id }}, this)">
+                     data-skill-id="{{ $skill->id }}">
                     <div class="flex items-center gap-3">
                         @if($skill->icon)
                             <span class="w-12 h-12 text-4xl group-hover:scale-110 transition-transform duration-300 flex-shrink-0 flex items-center justify-center">{!! $skill->icon !!}</span>
@@ -135,9 +134,9 @@
 </div>
 
 <!-- Contact Modal -->
-<div id="contact-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+<div id="contact-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true" aria-hidden="true">
     <!-- Backdrop -->
-    <div class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm transition-opacity" aria-hidden="true" onclick="closeContactModal()"></div>
+    <div class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm transition-opacity" aria-hidden="true" data-modal-close></div>
 
     <!-- Modal Container -->
     <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
@@ -201,7 +200,7 @@
                     </div>
                 </div>
                 <div class="bg-gray-50 dark:bg-gray-700/50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-emerald-600 dark:bg-indigo-600 text-base font-medium text-white hover:bg-emerald-700 dark:hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 sm:ml-3 sm:w-auto sm:text-sm" onclick="closeContactModal()">
+                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-emerald-600 dark:bg-indigo-600 text-base font-medium text-white hover:bg-emerald-700 dark:hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 sm:ml-3 sm:w-auto sm:text-sm" data-modal-close>
                         <span data-translate="contact.close">{{ __('contact.close') }}</span>
                     </button>
                 </div>
@@ -210,70 +209,3 @@
     </div>
 </div>
 @endsection
-
-<script>
-    function openContactModal() {
-        document.getElementById('contact-modal').classList.remove('hidden');
-    }
-
-    function closeContactModal() {
-        document.getElementById('contact-modal').classList.add('hidden');
-    }
-
-    // Close modal on ESC key
-    document.addEventListener('keydown', function(event) {
-        if (event.key === "Escape") {
-            closeContactModal();
-        }
-    });
-    
-    let activeSkillIds = new Set();
-
-    function filterBySkill(skillId, element) {
-        const skills = document.querySelectorAll('.skill-card');
-        const projects = document.querySelectorAll('.project-card');
-        const experiences = document.querySelectorAll('.experience-card');
-        const skillBadges = document.querySelectorAll('.skill-badge');
-
-        // Toggle active state
-        if (activeSkillIds.has(skillId)) {
-            activeSkillIds.delete(skillId);
-            element.classList.remove('ring-2', 'ring-emerald-500', 'dark:ring-indigo-500', 'bg-emerald-50', 'dark:bg-indigo-900/20');
-        } else {
-            activeSkillIds.add(skillId);
-            element.classList.add('ring-2', 'ring-emerald-500', 'dark:ring-indigo-500', 'bg-emerald-50', 'dark:bg-indigo-900/20');
-        }
-
-        // Highlight badges
-        skillBadges.forEach(badge => {
-            const badgeId = parseInt(badge.getAttribute('data-skill-id'));
-            if (activeSkillIds.has(badgeId)) {
-                 badge.classList.remove('bg-emerald-50', 'dark:bg-indigo-900/30', 'text-emerald-700', 'dark:text-indigo-300', 'border-emerald-100', 'dark:border-indigo-800');
-                 badge.classList.add('bg-emerald-600', 'dark:bg-indigo-600', 'text-white', 'border-transparent');
-            } else {
-                 badge.classList.add('bg-emerald-50', 'dark:bg-indigo-900/30', 'text-emerald-700', 'dark:text-indigo-300', 'border-emerald-100', 'dark:border-indigo-800');
-                 badge.classList.remove('bg-emerald-600', 'dark:bg-indigo-600', 'text-white', 'border-transparent');
-            }
-        });
-
-        // Filter items
-        if (activeSkillIds.size === 0) {
-            // Reset all items if no filter
-            projects.forEach(el => el.style.display = 'flex');
-            experiences.forEach(el => el.style.display = 'flex');
-        } else {
-            projects.forEach(el => {
-                const ids = el.getAttribute('data-skill-ids').split(',').map(Number);
-                // Check if item has ALL of the active skills
-                const hasSkill = [...activeSkillIds].every(id => ids.includes(id));
-                el.style.display = hasSkill ? 'flex' : 'none';
-            });
-
-            experiences.forEach(el => {
-                const ids = el.getAttribute('data-skill-ids').split(',').map(Number);
-                const hasSkill = [...activeSkillIds].every(id => ids.includes(id));
-                el.style.display = hasSkill ? 'flex' : 'none';
-            });
-        }
-    }
-</script>
