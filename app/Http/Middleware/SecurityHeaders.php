@@ -60,7 +60,9 @@ class SecurityHeaders
             "script-src 'self' 'nonce-{$nonce}' 'strict-dynamic'",
             "style-src 'self' 'unsafe-inline'",
             "font-src 'self'",
-            "img-src 'self' data: blob: https://res.cloudinary.com",
+            // Kept broad on purpose: image URLs are stored absolute against the
+            // production domain, which is not 'self' on a preview deployment.
+            "img-src 'self' data: blob: https:",
             "base-uri 'self'",
             "form-action 'self'",
             "frame-ancestors 'none'",
