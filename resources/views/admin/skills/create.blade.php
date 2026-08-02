@@ -34,7 +34,7 @@
 
             <div class="flex justify-end pt-4">
                 <a href="{{ route('admin.skills.index') }}" class="bg-white dark:bg-gray-700 py-2.5 px-6 border border-gray-300 dark:border-gray-600 rounded-xl shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 mr-4 transition-colors">{{ __('Cancel') }}</a>
-                <button type="submit" class="inline-flex justify-center py-2.5 px-6 border border-transparent shadow-lg shadow-emerald-500/30 text-sm font-medium rounded-xl text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all hover:scale-105">{{ __('Save') }}</button>
+                <button type="submit" class="inline-flex justify-center py-2.5 px-6 border border-transparent shadow-lg shadow-emerald-500/30 text-sm font-medium rounded-xl text-white bg-emerald-700 hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all hover:scale-105">{{ __('Save') }}</button>
             </div>
         </form>
     </div>

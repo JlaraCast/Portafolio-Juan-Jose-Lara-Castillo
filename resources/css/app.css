@@ -47,6 +47,9 @@ body {
 }
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
+/* storage/framework/views is deliberately not scanned: it holds whatever
+   happened to be compiled, so including it made the output depend on cache
+   state and kept generating classes that had already been renamed. The Blade
+   sources below are the real input. */
 @source '../**/*.blade.php';
 @source '../**/*.js';

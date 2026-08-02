@@ -56,7 +56,7 @@ function initSkillFilter() {
 
     const CARD_ACTIVE = ['ring-2', 'ring-emerald-500', 'dark:ring-indigo-500', 'bg-emerald-50', 'dark:bg-indigo-900/20'];
     const BADGE_IDLE = ['bg-emerald-50', 'dark:bg-indigo-900/30', 'text-emerald-700', 'dark:text-indigo-300', 'border-emerald-100', 'dark:border-indigo-800'];
-    const BADGE_ACTIVE = ['bg-emerald-600', 'dark:bg-indigo-600', 'text-white', 'border-transparent'];
+    const BADGE_ACTIVE = ['bg-emerald-700', 'dark:bg-indigo-600', 'text-white', 'border-transparent'];
 
     const render = () => {
         badges.forEach((badge) => {

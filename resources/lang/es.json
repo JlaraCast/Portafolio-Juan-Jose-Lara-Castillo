@@ -129,7 +129,7 @@
     "skills.title": "Habilidades Técnicas",
     "projects.title": "Experiencia",
     "projects.heading": "Proyectos",
-    "contact.title": "Contáctame",
+    "contact.title": "¿Listo para colaborar?",
     "contact.phone": "Teléfono",
     "contact.profile": "Ver perfil",
     "contact.close": "Cerrar",
@@ -144,5 +144,7 @@
     "GitHub": "GitHub",
     "projects.view_code": "Ver código",
     "projects.live_demo": "Ver demo",
-    "Toggle dark mode": "Cambiar modo oscuro"
+    "Toggle dark mode": "Cambiar modo oscuro",
+    "footer": "Todos los derechos reservados",
+    "skills.filter_note": "Haz clic en una habilidad para filtrar proyectos y experiencias relacionados."
 }
